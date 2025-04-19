@@ -1,0 +1,147 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header */
+header {
+  background-color: #1e1e1e;
+  padding: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00df9a;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: #ccc;
+  transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #00df9a;
+}
+
+nav .btn {
+  padding: 6px 14px;
+  background-color: #00df9a;
+  color: #000;
+  border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+  height: 90vh;
+  background: linear-gradient(to bottom right, #121212, #1e1e1e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.hero-btn {
+  background-color: #00df9a;
+  color: #000;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #00c185;
+}
+
+/* Footer */
+footer {
+  background-color: #1e1e1e;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Categories Section */
+.categories-section {
+  padding: 60px 0;
+  background-color: #181818;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #00df9a;
+  margin-bottom: 40px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.category-card {
+  background-color: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.category-card h3 {
+  padding: 15px;
+  color: #fff;
+}

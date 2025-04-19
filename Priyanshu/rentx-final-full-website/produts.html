@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RentX - Fashion Products</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B3C34; /* Deep Emerald */
+      --secondary: #D4A017; /* Gold Accent */
+      --accent: #1D3557; /* Royal Sapphire */
+      --dark: #1A1A1A; /* Charcoal */
+      --light: #F8F1E9; /* Creamy Off-White */
+      --gray: #6B7280; /* Neutral Gray */
+      --gray-light: #E5E7EB; /* Light Gray */
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+    }
+    
+    .bg-primary {
+      background-color: var(--primary) !important;
+    }
+    
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+    
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+    
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      background-color: #fff;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .footer {
+      background-color: var(--dark);
+      color: #FFFFFF;
+    }
+    
+    .footer h4, .footer h5, .footer p, .footer a, .footer li {
+      color: #FFFFFF !important;
+    }
+    
+    .footer a:hover {
+      color: var(--secondary) !important;
+    }
+    
+    .footer .text-muted {
+      color: #FFFFFF !important;
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      color: var(--dark);
+    }
+    
+    .nav-link {
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--secondary);
+    }
+    
+    .product-img {
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .sidebar {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .filter-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .filter-group h6 {
+      margin-bottom: 0.75rem;
+    }
+    
+    .rating-stars {
+      color: #f39c12;
+    }
+    
+    .badge-top-rated {
+      background-color: var(--secondary);
+      color: var(--dark);
+      font-size: 0.75rem;
+    }
+    
+    .load-more-btn {
+      display: block;
+      margin: 2rem auto;
+      width: fit-content;
+    }
+    
+    @media (max-width: 991px) {
+      .sidebar {
+        display: none;
+      }
+    }
+
+    .category-banner {
+      background-color: var(--primary);
+      color: white;
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .category-banner h1 {
+      color: white;
+      font-weight: 700;
+    }
+
+    .category-banner p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="sticky-top bg-white shadow-sm">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand text-primary" href="index.html">
+          <i class="fas fa-exchange-alt me-2"></i>RentX
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="categories.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="how-it-works.html">How it Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-outline-primary" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+              <a class="btn btn-primary" href="signup.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Category Banner -->
+  <div class="category-banner">
+    <div class="container">
+      <h1>Fashion Collection</h1>
+      <p>Discover our premium selection of designer clothing, accessories, and footwear available for rent at affordable prices.</p>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Fashion Products</h2>
+        <div>
+          <button class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterSidebar">
+            <i class="fas fa-filter"></i> Filters
+          </button>
+          <select id="sort-options" class="form-select d-inline-block w-auto ms-2">
+            <option value="default">Sort By: Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating-high">Rating: High to Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="sidebar">
+            <h5 class="fw-bold mb-3">Filters</h5>
+            <div class="filter-group">
+              <h6>Price Range</h6>
+              <input type="range" class="form-range" id="price-filter" min="0" max="1000" value="1000">
+              <div class="d-flex justify-content-between">
+                <span>$0</span>
+                <span id="price-value">$1000</span>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h6>Rating</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rating-4" value="4">
+                <label class="form-check-label">4 Stars & Up <span class="rating-stars">★★★★</span></label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rating-3" value="3">
+                <label class="form-check-label">3 Stars & Up <span class="rating-stars">★★★</span></label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h6>Fashion Type</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="type-clothing" value="clothing" checked>
+                <label class="form-check-label">Clothing</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="type-accessories" value="accessories" checked>
+                <label class="form-check-label">Accessories</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="type-footwear" value="footwear" checked>
+                <label class="form-check-label">Footwear</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Product Grid -->
+        <div class="col-lg-9">
+          <div class="row g-4" id="product-grid"></div>
+          <button class="btn btn-primary load-more-btn" id="load-more">Load More</button>
+        </div>
+      </div>
+    </div>
+    <!-- Offcanvas Sidebar for Mobile -->
+    <div class="offcanvas offcanvas-start" id="filterSidebar">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Filters</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="filter-group">
+          <h6>Price Range</h6>
+          <input type="range" class="form-range" id="price-filter-mobile" min="0" max="1000" value="1000">
+          <div class="d-flex justify-content-between">
+            <span>$0</span>
+            <span id="price-value-mobile">$1000</span>
+          </div>
+        </div>
+        <div class="filter-group">
+          <h6>Rating</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rating-4-mobile" value="4">
+            <label class="form-check-label">4 Stars & Up <span class="rating-stars">★★★★</span></label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rating-3-mobile" value="3">
+            <label class="form-check-label">3 Stars & Up <span class="rating-stars">★★★</span></label>
+          </div>
+        </div>
+        <div class="filter-group">
+          <h6>Fashion Type</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="type-clothing-mobile" value="clothing" checked>
+            <label class="form-check-label">Clothing</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="type-accessories-mobile" value="accessories" checked>
+            <label class="form-check-label">Accessories</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="type-footwear-mobile" value="footwear" checked>
+            <label class="form-check-label">Footwear</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-white py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h4 class="fw-bold mb-3"><i class="fas fa-exchange-alt me-2"></i>RentX</h4>
+          <p>India's most trusted rental platform connecting people who need items with those who have them to rent.</p>
+          <div class="d-flex gap-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">About Us</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Categories</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">How It Works</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="category-products.html?cat=fashion" class="text-decoration-none">Fashion</a></li>
+            <li class="mb-2"><a href="category-products.html?cat=electronics" class="text-decoration-none">Electronics</a></li>
+            <li class="mb-2"><a href="category-products.html?cat=furniture" class="text-decoration-none">Furniture</a></li>
+            <li class="mb-2"><a href="category-products.html?cat=sports" class="text-decoration-none">Sports</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h5 class="fw-bold mb-3">Newsletter</h5>
+          <p>Subscribe to get updates on new items and special offers.</p>
+          <div class="mb-3 newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email address">
+              <button class="btn btn-light" type="submit"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary">
+      <div class="text-center">
+        <p class="mb-0">© 2025 RentX. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Sample product data - only fashion items
+    const fashionProducts = [
+      { 
+        id: 1, 
+        name: "Designer Evening Gown", 
+        category: "fashion", 
+        type: "clothing",
+        price: 79.99, 
+        rating: 4.7, 
+        image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Elegant evening gown for special occasions, perfect for weddings and galas." 
+      },
+      { 
+        id: 2, 
+        name: "Premium Leather Handbag", 
+        category: "fashion", 
+        type: "accessories",
+        price: 39.99, 
+        rating: 4.5, 
+        image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Stylish designer handbag with multiple compartments for daily use." 
+      },
+      { 
+        id: 3, 
+        name: "Designer Sunglasses", 
+        category: "fashion", 
+        type: "accessories",
+        price: 29.99, 
+        rating: 4.2, 
+        image: "https://images.unsplash.com/photo-1577805947697-6e2e8a76bd3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Trendy UV-protected sunglasses with polarized lenses." 
+      },
+      { 
+        id: 4, 
+        name: "Men's Formal Shoes", 
+        category: "fashion", 
+        type: "footwear",
+        price: 49.99, 
+        rating: 4.8, 
+        image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Premium leather formal shoes for business and special occasions." 
+      },
+      { 
+        id: 5, 
+        name: "Silk Summer Dress", 
+        category: "fashion", 
+        type: "clothing",
+        price: 59.99, 
+        rating: 4.6, 
+        image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Lightweight silk dress perfect for summer events and parties." 
+      },
+      { 
+        id: 6, 
+        name: "Designer Watch", 
+        category: "fashion", 
+        type: "accessories",
+        price: 89.99, 
+        rating: 4.9, 
+        image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Luxury designer watch with leather strap and water resistance." 
+      },
+      { 
+        id: 7, 
+        name: "Women's High Heels", 
+        category: "fashion", 
+        type: "footwear",
+        price: 45.99, 
+        rating: 4.4, 
+        image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Elegant high heels for formal events and parties." 
+      },
+      { 
+        id: 8, 
+        name: "Cashmere Sweater", 
+        category: "fashion", 
+        type: "clothing",
+        price: 65.99, 
+        rating: 4.7, 
+        image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Premium cashmere sweater for winter comfort and style." 
+      },
+      { 
+        id: 9, 
+        name: "Designer Scarf", 
+        category: "fashion", 
+        type: "accessories",
+        price: 25.99, 
+        rating: 4.3, 
+        image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Luxury designer scarf made from premium materials." 
+      },
+      { 
+        id: 10, 
+        name: "Casual Sneakers", 
+        category: "fashion", 
+        type: "footwear",
+        price: 35.99, 
+        rating: 4.5, 
+        image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+        description: "Comfortable and stylish sneakers for everyday wear." 
+      }
+    ];
+
+    // Pagination
+    let currentPage = 1;
+    const itemsPerPage = 6;
+
+    // Filter and render products
+    function renderProducts(page = 1) {
+      const productGrid = document.getElementById('product-grid');
+      if (!productGrid) return;
+
+      productGrid.innerHTML = '';
+
+      let filteredProducts = [...fashionProducts];
+
+      // Apply filters
+      const maxPrice = parseInt(document.getElementById('price-filter').value);
+      const rating4 = document.getElementById('rating-4').checked;
+      const rating3 = document.getElementById('rating-3').checked;
+      const clothingChecked = document.getElementById('type-clothing').checked;
+      const accessoriesChecked = document.getElementById('type-accessories').checked;
+      const footwearChecked = document.getElementById('type-footwear').checked;
+      
+      filteredProducts = filteredProducts.filter(product => 
+        product.price <= maxPrice &&
+        (!rating4 || product.rating >= 4) &&
+        (!rating3 || product.rating >= 3) &&
+        (
+          (clothingChecked && product.type === "clothing") ||
+          (accessoriesChecked && product.type === "accessories") ||
+          (footwearChecked && product.type === "footwear")
+        )
+      );
+
+      // Apply sorting
+      const sortOption = document.getElementById('sort-options').value;
+      if (sortOption === 'price-low') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+      } else if (sortOption === 'price-high') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+      } else if (sortOption === 'rating-high') {
+        filteredProducts.sort((a, b) => b.rating - a.rating);
+      }
+
+      // Paginate
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const paginatedProducts = filteredProducts.slice(start, end);
+
+      if (paginatedProducts.length === 0) {
+        productGrid.innerHTML = '<p class="text-center text-muted">No fashion products found matching your filters.</p>';
+        const loadMoreBtn = document.getElementById('load-more');
+        if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+        return;
+      }
+
+      paginatedProducts.forEach(product => {
+        const productCard = `
+          <div class="col-md-6 col-lg-4">
+            <div class="card product-card h-100 border-0 shadow-sm">
+              ${product.rating >= 4.5 ? '<span class="badge badge-top-rated position-absolute top-0 start-0 m-2">Top Rated</span>' : ''}
+              <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text text-muted small">${product.description}</p>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="text-primary fw-bold">$${product.price.toFixed(2)}</span>
+                  <span class="rating-stars">${'★'.repeat(Math.round(product.rating))}${'☆'.repeat(5 - Math.round(product.rating))}</span>
+                </div>
+                <a href="#" class="btn btn-outline-primary btn-sm w-100">Rent Now</a>
+              </div>
+            </div>
+          </div>
+        `;
+        productGrid.innerHTML += productCard;
+      });
+
+      // Show/hide load more button
+      const loadMoreBtn = document.getElementById('load-more');
+      if (loadMoreBtn) {
+        loadMoreBtn.style.display = filteredProducts.length > end ? 'block' : 'none';
+      }
+    }
+
+    // Initialize event listeners
+    function initEventListeners() {
+      // Price filter
+      const priceFilter = document.getElementById('price-filter');
+      if (priceFilter) {
+        priceFilter.addEventListener('input', () => {
+          document.getElementById('price-value').textContent = `$${priceFilter.value}`;
+          document.getElementById('price-value-mobile').textContent = `$${priceFilter.value}`;
+          document.getElementById('price-filter-mobile').value = priceFilter.value;
+          currentPage = 1;
+          renderProducts();
+        });
+      }
+
+      // Mobile price filter
+      const priceFilterMobile = document.getElementById('price-filter-mobile');
+      if (priceFilterMobile) {
+        priceFilterMobile.addEventListener('input', () => {
+          document.getElementById('price-value-mobile').textContent = `$${priceFilterMobile.value}`;
+          document.getElementById('price-value').textContent = `$${priceFilterMobile.value}`;
+          document.getElementById('price-filter').value = priceFilterMobile.value;
+          currentPage = 1;
+          renderProducts();
+        });
+      }
+
+      // Rating filters
+      ['rating-4', 'rating-3', 'rating-4-mobile', 'rating-3-mobile'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.addEventListener('change', () => {
+            if (id.includes('mobile')) {
+              const desktopId = id.replace('-mobile', '');
+              const desktopElement = document.getElementById(desktopId);
+              if (desktopElement) desktopElement.checked = element.checked;
+            } else {
+              const mobileId = id + '-mobile';
+              const mobileElement = document.getElementById(mobileId);
+              if (mobileElement) mobileElement.checked = element.checked;
+            }
+            currentPage = 1;
+            renderProducts();
+          });
+        }
+      });
+
+      // Type filters
+      ['type-clothing', 'type-accessories', 'type-footwear'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.addEventListener('change', () => {
+            const mobileId = id + '-mobile';
+            const mobileElement = document.getElementById(mobileId);
+            if (mobileElement) mobileElement.checked = element.checked;
+            currentPage = 1;
+            renderProducts();
+          });
+        }
+      });
+
+      // Mobile type filters
+      ['type-clothing-mobile', 'type-accessories-mobile', 'type-footwear-mobile'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.addEventListener('change', () => {
+            const desktopId = id.replace('-mobile', '');
+            const desktopElement = document.getElementById(desktopId);
+            if (desktopElement) desktopElement.checked = element.checked;
+            currentPage = 1;
+            renderProducts();
+          });
+        }
+      });
+
+      // Sort options
+      const sortOptions = document.getElementById('sort-options');
+      if (sortOptions) {
+        sortOptions.addEventListener('change', () => {
+          currentPage = 1;
+          renderProducts();
+        });
+      }
+
+      // Load more
+      const loadMoreBtn = document.getElementById('load-more');
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+          currentPage++;
+          renderProducts(currentPage);
+        });
+      }
+
+      // Newsletter form
+      const newsletterForm = document.querySelector('.newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', e => {
+          e.preventDefault();
+          const emailInput = newsletterForm.querySelector('input');
+          if (!emailInput) return;
+          
+          const email = emailInput.value;
+          if (!email.includes('@')) {
+            alert('Please enter a valid email address');
+            return;
+          }
+          alert(`Thank you for subscribing with ${email}! You'll hear from us soon.`);
+          newsletterForm.reset();
+        });
+      }
+    }
+
+    // Initial render and event listeners setup
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      initEventListeners();
+    });
+  </script>
+</body>
+</html>

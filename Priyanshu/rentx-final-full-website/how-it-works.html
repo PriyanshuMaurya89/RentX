@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works - RentX</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B3C34; /* Deep Emerald */
+      --secondary: #D4A017; /* Gold Accent */
+      --accent: #1D3557; /* Royal Sapphire */
+      --dark: #1A1A1A; /* Charcoal */
+      --light: #F8F1E9; /* Creamy Off-White */
+      --gray: #6B7280; /* Neutral Gray */
+      --gray-light: #E5E7EB; /* Light Gray */
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+    }
+    
+    .bg-primary {
+      background-color: var(--primary) !important;
+    }
+    
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+    
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, rgba(27, 60, 52, 0.9) 0%, rgba(29, 53, 87, 0.9) 100%), 
+                  url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    }
+    
+    .step-card, .benefit-card, .faq-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+    }
+    
+    .step-card:hover, .benefit-card:hover, .faq-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(27, 60, 52, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .step-number {
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary);
+      color: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    
+    .footer {
+      background-color: var(--dark);
+      color: #FFFFFF;
+    }
+    
+    .footer h4, .footer h5, .footer p, .footer a, .footer li {
+      color: #FFFFFF !important;
+    }
+    
+    .footer a:hover {
+      color: var(--secondary) !important;
+    }
+    
+    .footer .text-muted {
+      color: #FFFFFF !important;
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+    
+    .hero-btn {
+      background-color: var(--light);
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+    
+    .hero-btn:hover {
+      background-color: var(--secondary);
+      color: var(--dark);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      color: var(--dark);
+    }
+
+    .nav-link {
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary);
+    }
+
+    .card-body {
+      background-color: var(--light);
+    }
+
+    .faq-header {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="sticky-top bg-white shadow-sm">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand text-primary" href="index.html">
+          <i class="fas fa-exchange-alt me-2"></i>RentX
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="category.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="how-it-works.html">How it Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-outline-primary" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+              <a class="btn btn-primary" href="signup.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero text-white py-5">
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <div class="col-lg-8 mx-auto text-center">
+          <h1 class="display-4 fw-bold mb-4">How RentX Works</h1>
+          <p class="lead mb-4">Renting items has never been easier. Our simple process connects you with what you need, when you need it.</p>
+          <a href="categories.html" class="btn hero-btn btn-lg px-4 me-2">Start Renting</a>
+          <a href="register.html" class="btn btn-outline-light btn-lg px-4">Become a Lender</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Simple 4-Step Process</h2>
+        <p class="text-muted">Get what you need in just a few clicks</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card step-card h-100 border-0 shadow-sm position-relative p-4">
+            <div class="step-number">1</div>
+            <div class="step-icon mx-auto">
+              <i class="fas fa-search text-primary" style="font-size: 30px;"></i>
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title">Browse & Select</h4>
+              <p class="card-text text-muted">Explore our wide range of categories to find exactly what you need. Filter by location, price, and availability.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card step-card h-100 border-0 shadow-sm position-relative p-4">
+            <div class="step-number">2</div>
+            <div class="step-icon mx-auto">
+              <i class="fas fa-calendar-check text-primary" style="font-size: 30px;"></i>
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title">Book & Pay</h4>
+              <p class="card-text text-muted">Select your rental dates and make a secure payment through our platform. Your payment is protected until you receive the item.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card step-card h-100 border-0 shadow-sm position-relative p-4">
+            <div class="step-number">3</div>
+            <div class="step-icon mx-auto">
+              <i class="fas fa-truck text-primary" style="font-size: 30px;"></i>
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title">Receive Item</h4>
+              <p class="card-text text-muted">Choose delivery or pickup. Meet the lender or get it delivered to your doorstep - the choice is yours.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card step-card h-100 border-0 shadow-sm position-relative p-4">
+            <div class="step-number">4</div>
+            <div class="step-icon mx-auto">
+              <i class="fas fa-undo text-primary" style="font-size: 30px;"></i>
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title">Return & Review</h4>
+              <p class="card-text text-muted">Return the item in the same condition and leave a review. Build your reputation as a trusted renter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Demo Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="fw-bold mb-4">See RentX in Action</h2>
+          <p class="lead text-muted mb-4">Watch our quick demo video to see how easy it is to rent items through RentX.</p>
+          <ul class="list-unstyled">
+            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Simple booking process</li>
+            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Secure payment protection</li>
+            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Verified lenders and renters</li>
+            <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> 24/7 customer support</li>
+          </ul>
+          <a href="register.html" class="btn btn-primary btn-lg px-4 mt-3">Get Started Now</a>
+        </div>
+        <div class="col-lg-6">
+          <div class="ratio ratio-16x9">
+            <iframe class="rounded shadow" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="How RentX Works" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Why Choose RentX?</h2>
+        <p class="text-muted">Experience the benefits of our peer-to-peer rental platform</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card benefit-card h-100 border-0 shadow-sm p-4">
+            <div class="card-body text-center">
+              <div class="step-icon mx-auto mb-4">
+                <i class="fas fa-shield-alt text-primary" style="font-size: 30px;"></i>
+              </div>
+              <h4 class="card-title">Secure Transactions</h4>
+              <p class="card-text text-muted">Our secure payment system holds your funds until you confirm receipt of the item, ensuring a safe transaction for both parties.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card benefit-card h-100 border-0 shadow-sm p-4">
+            <div class="card-body text-center">
+              <div class="step-icon mx-auto mb-4">
+                <i class="fas fa-search-dollar text-primary" style="font-size: 30px;"></i>
+              </div>
+              <h4 class="card-title">Save Money</h4>
+              <p class="card-text text-muted">Why buy when you can rent? Access high-quality items at a fraction of the purchase price and only pay for the time you need.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card benefit-card h-100 border-0 shadow-sm p-4">
+            <div class="card-body text-center">
+              <div class="step-icon mx-auto mb-4">
+                <i class="fas fa-leaf text-primary" style="font-size: 30px;"></i>
+              </div>
+              <h4 class="card-title">Eco-Friendly</h4>
+              <p class="card-text text-muted">Reduce waste and promote sustainability by sharing resources instead of buying new items that may rarely be used.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card benefit-card h-100 border-0 shadow-sm p-4">
+            <div class="card-body text-center">
+              <div class="step-icon mx-auto mb-4">
+                <i class="fas fa-user-check text-primary" style="font-size: 30px;"></i>
+              </div>
+              <h4 class="card-title">Verified Users</h4>
+              <p class="card-text text-muted">All users go through our verification process, and our review system helps you choose trustworthy lenders and renters.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card benefit-card h-100 border-0 shadow-sm p-4">
+            <div class="card-body text-center">
+              <div class="step-icon mx-auto mb-4">
+                <i class="fas fa-headset text-primary" style="font-size: 30px;"></i>
+              </div>
+              <h4 class="card-title">24/7 Support</h4>
+              <p class="card-text text-muted">Our customer support team is available around the clock to help with any questions or issues that may arise.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card benefit-card h-100 border-0 shadow-sm p-4">
+            <div class="card-body text-center">
+              <div class="step-icon mx-auto mb-4">
+                <i class="fas fa-rupee-sign text-primary" style="font-size: 30px;"></i>
+              </div>
+              <h4 class="card-title">Earn Money</h4>
+              <p class="card-text text-muted">List your idle items and start earning passive income. We handle payments and insurance so you can rent with peace of mind.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Frequently Asked Questions</h2>
+        <p class="text-muted">Find answers to common questions about renting on RentX</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faqAccordion">
+            <div class="card faq-card mb-3 border-0 shadow-sm">
+              <div class="card-header faq-header bg-white" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                  How do I rent an item on RentX?
+                  <i class="fas fa-chevron-down"></i>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                <div class="card-body text-muted">
+                  Renting an item is simple! Just browse our categories, select the item you need, choose your rental dates, and make a secure payment. The lender will then coordinate delivery or pickup with you.
+                </div>
+              </div>
+            </div>
+            <div class="card faq-card mb-3 border-0 shadow-sm">
+              <div class="card-header faq-header bg-white" id="headingTwo" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                  What happens if the item gets damaged?
+                  <i class="fas fa-chevron-down"></i>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                <div class="card-body text-muted">
+                  All rentals include basic protection against accidental damage. For expensive items, we recommend purchasing additional protection during checkout. In case of damage, report it immediately and our support team will assist with the resolution process.
+                </div>
+              </div>
+            </div>
+            <div class="card faq-card mb-3 border-0 shadow-sm">
+              <div class="card-header faq-header bg-white" id="headingThree" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                  How are payments handled?
+                  <i class="fas fa-chevron-down"></i>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                <div class="card-body text-muted">
+                  Payments are processed securely through our platform. The renter's payment is held until 24 hours after the rental period ends to ensure everything went smoothly. Only then is the amount released to the lender, minus our service fee.
+                </div>
+              </div>
+            </div>
+            <div class="card faq-card mb-3 border-0 shadow-sm">
+              <div class="card-header faq-header bg-white" id="headingFour" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                  Can I extend my rental period?
+                  <i class="fas fa-chevron-down"></i>
+                </h5>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                <div class="card-body text-muted">
+                  Yes! If the item is available for extended periods, you can request an extension through the app. The lender will be notified and can approve your request. Additional charges will apply for the extended period.
+                </div>
+              </div>
+            </div>
+            <div class="card faq-card mb-3 border-0 shadow-sm">
+              <div class="card-header faq-header bg-white" id="headingFive" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                  How do I become a lender?
+                  <i class="fas fa-chevron-down"></i>
+                </h5>
+              </div>
+              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                <div class="card-body text-muted">
+                  To become a lender, simply create an account, verify your identity, and list your items for rent. You'll need to provide clear photos, a detailed description, set your availability and pricing. Our team may review your listing before it goes live.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container text-center py-4">
+      <h2 class="display-5 fw-bold mb-3">Ready to Get Started?</h2>
+      <p class="lead mb-4">Join thousands of happy users who are saving money and earning with RentX.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="register.html" class="btn btn-light btn-lg px-4">Sign Up Now</a>
+        <a href="categories.html" class="btn btn-outline-light btn-lg px-4">Browse Items</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-white py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h4 class="fw-bold mb-3"><i class="fas fa-exchange-alt me-2"></i>RentX</h4>
+          <p>India's most trusted rental platform connecting people who need items with those who have them to rent.</p>
+          <div class="d-flex gap-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html" class="text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="categories.html" class="text-decoration-none">Categories</a></li>
+            <li class="mb-2"><a href="how-it-works.html" class="text-decoration-none">How It Works</a></li>
+            <li class="mb-2"><a href="contact.html" class="text-decoration-none">Contact</a></li>
+            <li class="mb-2"><a href="blog.html" class="text-decoration-none">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-decoration-none">Electronics</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Vehicles</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Furniture</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Tools</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Party Supplies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h5 class="fw-bold mb-3">Newsletter</h5>
+          <p>Subscribe to get updates on new items and special offers.</p>
+          <form class="mb-3 newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email address">
+              <button class="btn btn-light" type="submit"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary">
+      <div class="text-center">
+        <p class="mb-0">© 2025 RentX. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Simple JavaScript for FAQ accordion
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqHeaders = document.querySelectorAll('.faq-header');
+      
+      faqHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+          const icon = this.querySelector('i');
+          if (icon.classList.contains('fa-chevron-down')) {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+          } else {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+          }
+        });
+      });
+
+      // Newsletter form handling
+      const newsletterForm = document.querySelector('.newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const email = newsletterForm.querySelector('input').value;
+          
+          if (!email.includes('@')) {
+            alert('Please enter a valid email address');
+            return;
+          }
+          
+          alert(`Thank you for subscribing with ${email}! You'll hear from us soon.`);
+          newsletterForm.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
