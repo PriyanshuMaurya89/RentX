@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RentX – Rent Anything, Anytime
 
 RentX is a modern platform where users can **rent anything** as per their requirements — from gadgets to furniture, books, tools, and more. It's designed to create a sustainable, sharing-based community with a sleek and user-friendly experience.
@@ -38,3 +39,6 @@ RentX is a modern platform where users can **rent anything** as per their requir
 
 ## 📁 Project Structure
 
+=======
+# RentX
+>>>>>>> e3c4128eacae16b7d24a09d5dd66687ce41e20d8
