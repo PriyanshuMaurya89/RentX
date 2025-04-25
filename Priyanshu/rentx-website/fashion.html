@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RentX - Designer Fashion Rentals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B3C34;
+      --secondary: #D4A017;
+      --accent: #1D3557;
+      --dark: #1A1A1A;
+      --light: #F8F1E9;
+      --gray: #6B7280;
+      --gray-light: #F5F5F5;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background-color: #fff;
+    }
+    .bg-primary {
+      background-color: var(--primary) !important;
+    }
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      border-radius: 25px;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary);
+      border-color: var(--secondary);
+    }
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      color: #fff;
+    }
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 150px 0;
+      text-align: center;
+    }
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .collections {
+      padding: 80px 0;
+      background-color: #fff;
+    }
+    .collection-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 300px;
+    }
+    .collection-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    .collection-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .collection-card:hover img {
+      transform: scale(1.05);
+    }
+    .collection-card .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+    .collection-card:hover .overlay {
+      opacity: 1;
+    }
+    .collection-card h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .collection-card p {
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .collection-card:hover p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .collection-card a {
+      text-decoration: none;
+    }
+    .collections h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 50px;
+      position: relative;
+      text-align: center;
+    }
+    .collections h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background-color: var(--secondary);
+      margin: 10px auto;
+    }
+    .filter-sidebar {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 20px;
+    }
+    .filter-sidebar h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+    .filter-sidebar .form-check {
+      margin-bottom: 10px;
+    }
+    .product-card {
+      border: none;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.03);
+    }
+    .product-card .card-body {
+      padding: 15px;
+    }
+    .product-card h5 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .product-card .occasion-tag {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    .why-rent-section {
+      background-color: var(--gray-light);
+      padding: 80px 0;
+    }
+    .why-rent-section .icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    .testimonial-section {
+      padding: 80px 0;
+      background-color: #fff;
+    }
+    .testimonial-card {
+      border: none;
+      background-color: var(--gray-light);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+    .nav-link {
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--secondary);
+    }
+    .footer {
+      background-color: var(--dark);
+      color: #fff;
+    }
+    .footer a {
+      color: #fff !important;
+    }
+    .footer a:hover {
+      color: var(--secondary) !important;
+    }
+    .breadcrumb {
+      background-color: transparent;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 991px) {
+      .filter-sidebar {
+        position: static;
+        margin-bottom: 20px;
+      }
+      .hero-section {
+        padding: 100px 0;
+      }
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+      .collection-card {
+        height: 250px;
+      }
+    }
+    @media (max-width: 767px) {
+      .col-md-6.col-lg-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      .product-card img {
+        height: 200px;
+      }
+      .collection-card {
+        height: 200px;
+      }
+      .collections h2 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .col-md-6.col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .collection-card {
+        height: 180px;
+      }
+      .collection-card h5 {
+        font-size: 1.2rem;
+      }
+      .collection-card p {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky-top bg-white shadow-sm">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand text-primary" href="#">
+          <i class="fas fa-exchange-alt me-2"></i>RentX
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="categories.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="how-it-works.html">How it Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-outline-primary" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+              <a class="btn btn-primary" href="signup.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-section fade-in">
+    <div class="container">
+      <h1>Designer Fashion for Every Occasion</h1>
+      <p>Rent luxury outfits from top designers at a fraction of the cost.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#products" class="btn btn-primary">Shop Women</a>
+        <a href="#products" class="btn btn-outline-primary">Shop Men</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="collections">
+    <div class="container">
+      <h2 class="fw-bold">Explore Our Exclusive Collections</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <a href="#products" class="collection-card">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Women's Clothing">
+            <div class="overlay">
+              <h5>Women's Couture</h5>
+              <p>Curated lehengas and gowns for timeless elegance</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#products" class="collection-card">
+            <img src="https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MST2661-01-M.jpg?v=1745218040&quality=20" alt="Men's Clothing">
+            <div class="overlay">
+              <h5>Men's Elegance</h5>
+              <p>Sherwanis and suits for distinguished style</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#products" class="collection-card">
+            <img src="https://www.kessa.com/wp-content/uploads/2024/07/kessa-ne127-tapasya-cotton-handblock-kurta-sitting-600x900.jpg" alt="Accessories">
+            <div class="overlay">
+              <h5>Luxury Accessories</h5>
+              <p>Jewelry and bags to complete your look</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="categories.html">Categories</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Fashion</li>
+        </ol>
+      </nav>
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <div class="filter-sidebar">
+            <h5 class="fw-bold">Filters</h5>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Category</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="womens">
+                <label class="form-check-label" for="womens">Women's Clothing</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="mens">
+                <label class="form-check-label" for="mens">Men's Clothing</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="accessories">
+                <label class="form-check-label" for="accessories">Accessories</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Price Range</label>
+              <input type="range" class="form-range" min="500" max="10000" step="500" id="priceRange">
+              <small class="text-muted">₹500 - ₹10,000</small>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Occasion</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="wedding">
+                <label class="form-check-label" for="wedding">Wedding</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="party">
+                <label class="form-check-label" for="party">Party</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="formal">
+                <label class="form-check-label" for="formal">Formal</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Designer</label>
+              <select class="form-select">
+                <option>All</option>
+                <option>Sabyasachi</option>
+                <option>Manish Malhotra</option>
+                <option>Anita Dongre</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-8">
+          <h2 class="fw-bold mb-4">Luxury Fashion Rentals</h2>
+          <div class="row g-4" id="products">
+            <div class="col-md-6 col-lg-4">
+              <div class="card product-card">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/LB9286_422-WINE_301.4360_23-12-2024-16-59:283x395?&dpr=on,2" class="card-img-top" alt="Bridal Lehenga">
+                <div class="card-body">
+                  <p class="occasion-tag">Wedding</p>
+                  <h5 class="card-title"> Bridal Lehenga</h5>
+                  <p class="card-text text-muted small">Hand-embroidered masterpiece for your big day.</p>
+                  <p class="fw-bold">₹6500 / 4 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.9</span>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card product-card">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/SAS8495_416-RED_301.28280_04-03-2025-18-41:283x395?&dpr=on,2" class="card-img-top" alt="Designer Gown">
+                <div class="card-body">
+                  <p class="occasion-tag">Party</p>
+                  <h5 class="card-title"> Gown</h5>
+                  <p class="card-text text-muted small">Glamorous sequined gown for evening events.</p>
+                  <p class="fw-bold">₹4500 / 4 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.8</span>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card product-card">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/ODES1102_302-Cream_301.1699_24-06-2024-23-58-2:283x395?&dpr=on,2" class="card-img-top" alt="Sherwani">
+                <div class="card-body">
+                  <p class="occasion-tag">Wedding</p>
+                  <h5 class="card-title"> Sherwani</h5>
+                  <p class="card-text text-muted small"> sherwani for grooms and festivities.</p>
+                  <p class="fw-bold">₹5000 / 4 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.7</span>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card product-card">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/CTSD1249_310-Black.6192_12-01-2024-13-16:283x395?&dpr=on,2" class="card-img-top" alt="Tuxedo">
+                <div class="card-body">
+                  <p class="occasion-tag">Formal</p>
+                  <h5 class="card-title">Classic Black Tuxedo</h5>
+                  <p class="card-text text-muted small">Timeless tuxedo for black-tie events.</p>
+                  <p class="fw-bold">₹4000 / 4 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.6</span>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card product-card">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/SB17031_422-WINE_301.7346_26-12-2024-16-16:283x395?&dpr=on,2" class="card-img-top" alt="Cocktail Dress">
+                <div class="card-body">
+                  <p class="occasion-tag">Party</p>
+                  <h5 class="card-title"> Cocktail Dress</h5>
+                  <p class="card-text text-muted small">Chic dress for exclusive soirées.</p>
+                  <p class="fw-bold">₹5500 / 4 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.8</span>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card product-card">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/I02_Manyavar+Still00111_17-08-2022-00-23:283x395?&dpr=on,2" class="card-img-top" alt="Premium Suit">
+                <div class="card-body">
+                  <p class="occasion-tag">Formal</p>
+                  <h5 class="card-title"> Suit</h5>
+                  <p class="card-text text-muted small">Tailored suit for weddings or corporate events.</p>
+                  <p class="fw-bold">₹4500 / 4 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.7</span>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-rent-section">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">Why Choose RentX?</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-3">
+          <i class="fas fa-crown icon"></i>
+          <h5>Premium Designers</h5>
+          <p class="text-muted">Access collections from Sabyasachi, Manish Malhotra, and more.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="fas fa-wallet icon"></i>
+          <h5>Cost-Effective</h5>
+          <p class="text-muted">Rent luxury outfits at up to 80% off retail prices.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="fas fa-leaf icon"></i>
+          <h5>Eco-Friendly</h5>
+          <p class="text-muted">Support sustainable fashion by renting instead of buying.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="fas fa-shipping-fast icon"></i>
+          <h5>Seamless Delivery</h5>
+          <p class="text-muted">Nationwide delivery and pickup, tailored to your schedule.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonial-section">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">What Our Customers Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card testimonial-card">
+            <p class="text-muted">"Rented a Sabyasachi lehenga for my wedding, and it was stunning! The process was so easy."</p>
+            <h6 class="fw-bold">Priya S.</h6>
+            <div><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card testimonial-card">
+            <p class="text-muted">"Loved the variety of designer gowns. Perfect for my gala event, and delivery was spot on."</p>
+            <h6 class="fw-bold">Anisha R.</h6>
+            <div><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star-half-alt text-warning"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card testimonial-card">
+            <p class="text-muted">"The sherwani I rented was a showstopper. RentX made my event unforgettable."</p>
+            <h6 class="fw-bold">Rahul M.</h6>
+            <div><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h4 class="fw-bold mb-3"><i class="fas fa-exchange-alt me-2"></i>RentX</h4>
+          <p>India's premier rental platform for luxury fashion and more.</p>
+          <div class="d-flex gap-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">About Us</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Categories</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">How It Works</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="fashion.html" class="text-decoration-none">Fashion</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Electronics</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Furniture</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Sports</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Event & Party Supplies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h5 class="fw-bold mb-3">Newsletter</h5>
+          <p>Stay updated with the latest fashion rentals and offers.</p>
+          <form class="mb-3 newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email address">
+              <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr class="my-4 border-light">
+      <div class="text-center">
+        <p class="mb-0">© 2025 RentX. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const newsletterForm = document.querySelector('.newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const email = newsletterForm.querySelector('input').value;
+          if (!email.includes('@')) {
+            alert('Please enter a valid email address');
+            return;
+          }
+          alert(`Thank you for subscribing with ${email}! You'll hear from us soon.`);
+          newsletterForm.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RentX - List Your Item</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B3C34; /* Deep Emerald */
+      --secondary: #D4A017; /* Gold Accent */
+      --accent: #1D3557; /* Royal Sapphire */
+      --dark: #1A1A1A; /* Charcoal */
+      --light: #F8F1E9; /* Creamy Off-White */
+      --gray: #6B7280; /* Neutral Gray */
+      --gray-light: #E5E7EB; /* Light Gray */
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+    }
+    
+    .bg-primary {
+      background-color: var(--primary) !important;
+    }
+    
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+    
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+    
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+    
+    .form-container {
+      background-color: var(--light);
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+      padding: 30px;
+    }
+    
+    .form-container:hover {
+      transform: translateY(-5px);
+    }
+    
+    .form-control, .form-select {
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      background-color: var(--light);
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 5px rgba(27, 60, 52, 0.3);
+      background-color: var(--gray-light);
+    }
+    
+    .submit-btn {
+      background-color: var(--secondary);
+      color: var(--dark);
+      border-radius: 8px;
+      font-family: 'Playfair Display', serif;
+      transition: background-color 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+    
+    .image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .image-preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid var(--gray-light);
+    }
+    
+    .breadcrumb {
+      background-color: transparent;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .breadcrumb-item a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .breadcrumb-item a:hover {
+      color: var(--secondary);
+    }
+    
+    .footer {
+      background-color: var(--dark);
+      color: #FFFFFF;
+    }
+    
+    .footer h4, .footer h5, .footer p, .footer a, .footer li {
+      color: #FFFFFF !important;
+    }
+    
+    .footer a:hover {
+      color: var(--secondary) !important;
+    }
+    
+    .character-count {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    .invalid-feedback {
+      font-size: 0.85rem;
+    }
+    
+    /* Prevent red border on load */
+    .form-control:invalid:not(:focus):not(.is-invalid),
+    .form-select:invalid:not(:focus):not(.is-invalid) {
+      border-color: var(--gray-light);
+      background-image: none;
+    }
+    
+    /* Progress bar */
+    .progress {
+      position: relative;
+    }
+    
+    .progress-bar {
+      transition: width 0.3s ease;
+    }
+    
+    .progress-bar.success {
+      background-color: var(--secondary);
+      color: var(--dark);
+    }
+    
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="sticky-top bg-white shadow-sm">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand text-primary" href="index.html">
+          <i class="fas fa-exchange-alt me-2"></i>RentX
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="category.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="how-it-works.html">How it Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-outline-primary" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+              <a class="btn btn-primary" href="signup.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="py-5">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">List Your Item</li>
+        </ol>
+      </nav>
+      
+      <h2 class="fw-bold text-center mb-4">List Your Item for Rent</h2>
+      <p class="text-center text-muted mb-5">Fill out the details below to list your item on RentX and start earning!</p>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="form-container">
+            <form id="listItemForm" class="needs-validation" novalidate>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progressBar">Step 0/8</div>
+              </div>
+              
+              <!-- Item Name -->
+              <div class="mb-3">
+                <label for="itemName" class="form-label">Item Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="itemName" placeholder="e.g., MacBook Pro 2023" required>
+                <div class="invalid-feedback">Please enter the item name.</div>
+              </div>
+              
+              <!-- Category -->
+              <div class="mb-3">
+                <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+                <select class="form-select" id="category" required>
+                  <option value="" selected disabled>Select Category</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Vehicles">Vehicles</option>
+                  <option value="Furniture">Furniture</option>
+                  <option value="Tools & Equipment">Tools & Equipment</option>
+                  <option value="Party Supplies">Party Supplies</option>
+                  <option value="Fashion">Fashion</option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+              </div>
+              
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="description" rows="4" placeholder="Describe your item..." required maxlength="500"></textarea>
+                <div class="character-count text-end"><span id="charCount">0</span>/500</div>
+                <div class="invalid-feedback">Please provide a description.</div>
+              </div>
+              
+              <!-- Price -->
+              <div class="mb-3">
+                <label for="price" class="form-label">Rental Price (₹/day) <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="price" placeholder="e.g., 999" min="1" required>
+                <div class="invalid-feedback">Please enter a valid price.</div>
+              </div>
+              
+              <!-- Availability -->
+              <div class="mb-3">
+                <label class="form-label">Availability <span class="text-danger">*</span></label>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="date" class="form-control" id="startDate" required>
+                    <div class="invalid-feedback">Please select a start date.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="date" class="form-control" id="endDate" required>
+                    <div class="invalid-feedback">Please select an end date.</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Location -->
+              <div class="mb-3">
+                <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="location" placeholder="e.g., Bangalore, Karnataka" required>
+                <div class="invalid-feedback">Please enter the item location.</div>
+              </div>
+              
+              <!-- Images -->
+              <div class="mb-3">
+                <label for="images" class="form-label">Upload Images (up to 3) <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" id="images" accept="image/*" multiple required>
+                <div class="invalid-feedback">Please upload at least one image.</div>
+                <div class="image-preview" id="imagePreview"></div>
+              </div>
+              
+              <!-- Submit Button -->
+              <div class="text-center">
+                <button type="submit" class="btn submit-btn btn-lg px-5" id="submitBtn">List Item</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-white">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-lg-4 footer-col">
+          <h4 class="fw-bold mb-3"><i class="fas fa-exchange-alt me-2"></i>RentX</h4>
+          <p>India's most trusted rental platform connecting people who need items with those who have them to rent.</p>
+          <div class="d-flex gap-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 footer-col">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html" class="text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">About Us</a></li>
+            <li class="mb-2"><a href="category.html" class="text-decoration-none">Categories</a></li>
+            <li class="mb-2"><a href="how-it-works.html" class="text-decoration-none">How It Works</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 footer-col">
+          <h5 class="fw-bold mb-3">Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-decoration-none">Electronics</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Vehicles</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Furniture</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Tools</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Party Supplies</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 footer-col">
+          <h5 class="fw-bold mb-3">Newsletter</h5>
+          <p>Subscribe to get updates on new items and special offers.</p>
+          <form class="mb-3 newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email address">
+              <button class="btn btn-light" type="submit"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary">
+      <div class="text-center">
+        <p class="mb-0">© 2025 RentX. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('listItemForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const imageInput = document.getElementById('images');
+      const imagePreview = document.getElementById('imagePreview');
+      const description = document.getElementById('description');
+      const charCount = document.getElementById('charCount');
+      const startDate = document.getElementById('startDate');
+      const endDate = document.getElementById('endDate');
+      const category = document.getElementById('category');
+      const progressBar = document.getElementById('progressBar');
+
+      // Set minimum date for startDate to today
+      const today = new Date().toISOString().split('T')[0];
+      startDate.min = today;
+
+      // Form fields and step names
+      const fields = [
+        { element: document.getElementById('itemName'), name: 'Item Name' },
+        { element: category, name: 'Category' },
+        { element: description, name: 'Description' },
+        { element: document.getElementById('price'), name: 'Price' },
+        { element: startDate, name: 'Start Date' },
+        { element: endDate, name: 'End Date' },
+        { element: document.getElementById('location'), name: 'Location' },
+        { element: imageInput, name: 'Images' }
+      ];
+
+      // Update progress bar
+      function updateProgress() {
+        let validFields = 0;
+        fields.forEach(field => {
+          const { element } = field;
+          if (element === imageInput) {
+            if (element.files.length > 0) validFields++;
+          } else if (element === description) {
+            if (element.value.trim().length > 0) validFields++;
+          } else if (element === category) {
+            if (element.value && element.value !== '') validFields++;
+          } else {
+            if (element.value && element.checkValidity()) validFields++;
+          }
+        });
+
+        const progress = (validFields / fields.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        progressBar.setAttribute('aria-valuenow', progress);
+
+        if (validFields === fields.length) {
+          progressBar.textContent = `Step ${validFields}/${fields.length}: ${fields[validFields - 1].name}`;
+        } else if (validFields > 0) {
+          progressBar.textContent = `Step ${validFields}/${fields.length}: ${fields[validFields - 1].name}`;
+        } else {
+          progressBar.textContent = `Step 0/${fields.length}`;
+        }
+      }
+
+      // Add input listeners to all fields
+      fields.forEach(field => {
+        field.element.addEventListener('input', updateProgress);
+        field.element.addEventListener('change', updateProgress);
+      });
+
+      // Bootstrap form validation
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        // Manually validate dates
+        if (startDate.value && startDate.value < today) {
+          startDate.classList.add('is-invalid');
+          startDate.nextElementSibling.textContent = 'Start date cannot be in the past.';
+        } else if (startDate.value && endDate.value && endDate.value < startDate.value) {
+          endDate.classList.add('is-invalid');
+          endDate.nextElementSibling.textContent = 'End date must be after start date.';
+        } else {
+          startDate.classList.remove('is-invalid');
+          endDate.classList.remove('is-invalid');
+        }
+
+        if (form.checkValidity() && !startDate.classList.contains('is-invalid') && !endDate.classList.contains('is-invalid')) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+          
+          // Simulate API call
+          setTimeout(() => {
+            progressBar.style.width = '100%';
+            progressBar.setAttribute('aria-valuenow', 100);
+            progressBar.textContent = 'Success';
+            progressBar.classList.add('success');
+
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'alert alert-success mt-3';
+            successMessage.textContent = 'Item listed successfully!';
+            form.appendChild(successMessage);
+
+            // Reset form after 2 seconds
+            setTimeout(() => {
+              form.reset();
+              imagePreview.innerHTML = '';
+              charCount.textContent = '0';
+              form.classList.remove('was-validated');
+              progressBar.style.width = '0%';
+              progressBar.setAttribute('aria-valuenow', 0);
+              progressBar.textContent = `Step 0/${fields.length}`;
+              progressBar.classList.remove('success');
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'List Item';
+              successMessage.remove();
+              startDate.min = today; // Reset min date
+            }, 2000);
+          }, 1000);
+        }
+        
+        form.classList.add('was-validated');
+      });
+
+      // Image preview
+      imageInput.addEventListener('change', function() {
+        imagePreview.innerHTML = '';
+        const files = this.files;
+        
+        if (files.length > 3) {
+          alert('You can upload a maximum of 3 images.');
+          this.value = '';
+          return;
+        }
+        
+        for (const file of files) {
+          if (!file.type.startsWith('image/')) {
+            alert('Please upload valid image files.');
+            this.value = '';
+            imagePreview.innerHTML = '';
+            return;
+          }
+          
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          imagePreview.appendChild(img);
+        }
+        updateProgress();
+      });
+
+      // Description character counter
+      description.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+        if (this.value.length > 500) {
+          this.value = this.value.slice(0, 500);
+          charCount.textContent = '500';
+        }
+      });
+
+      // Date validation on blur
+      startDate.addEventListener('blur', function() {
+        if (this.value && this.value < today) {
+          this.classList.add('is-invalid');
+          this.nextElementSibling.textContent = 'Start date cannot be in the past.';
+        } else {
+          this.classList.remove('is-invalid');
+          this.nextElementSibling.textContent = 'Please select a start date.';
+        }
+        if (this.value) {
+          endDate.min = this.value;
+        }
+        updateProgress();
+      });
+      
+      endDate.addEventListener('blur', function() {
+        if (this.value && startDate.value && this.value < startDate.value) {
+          this.classList.add('is-invalid');
+          this.nextElementSibling.textContent = 'End date must be after start date.';
+        } else {
+          this.classList.remove('is-invalid');
+          this.nextElementSibling.textContent = 'Please select an end date.';
+        }
+        updateProgress();
+      });
+
+      // Clear invalid state on input
+      startDate.addEventListener('input', function() {
+        this.classList.remove('is-invalid');
+        this.nextElementSibling.textContent = 'Please select a start date.';
+      });
+      
+      endDate.addEventListener('input', function() {
+        this.classList.remove('is-invalid');
+        this.nextElementSibling.textContent = 'Please select an end date.';
+      });
+
+      // Initialize progress on load
+      updateProgress();
+    });
+  </script>
+</body>
+</html>
