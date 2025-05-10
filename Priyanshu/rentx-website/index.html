@@ -58,12 +58,12 @@
       padding: 100px 0;
     }
     
-    .category-card, .item-card {
+    .category-card, .item-card, .testimonial-card, .ai-feature-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: none;
     }
     
-    .category-card:hover, .item-card:hover {
+    .category-card:hover, .item-card:hover, .testimonial-card:hover, .ai-feature-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     }
@@ -221,12 +221,12 @@
       padding: 10px;
     }
 
-    #ai-recommendations, #ai-categories {
+    #ai-recommendations, #ai-categories, #ai-features, #ai-testimonials {
       background-color: var(--gray-light);
       padding: 60px 0;
     }
 
-    #ai-recommendations .card, #ai-categories .card {
+    #ai-recommendations .card, #ai-categories .card, #ai-features .card, #ai-testimonials .card {
       border: none;
       background-color: var(--light);
     }
@@ -246,6 +246,7 @@
       border-radius: 50px;
       padding: 15px;
       font-size: 1.2rem;
+      animation: pulse 2s infinite;
     }
 
     #price-predictor .btn {
@@ -253,7 +254,13 @@
       color: var(--light);
     }
 
-    #chatbot-widget .chat-window, #price-predictor .predictor-window {
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    #chatbot-widget .chat-window {
       display: none;
       width: 300px;
       background-color: var(--light);
@@ -264,9 +271,8 @@
       right: 0;
     }
 
-    #chatbot-widget .chat-window {
-      height: 400px;
-      overflow: hidden;
+    #chatbot-widget .chat-window.active {
+      display: block;
     }
 
     #chatbot-widget .chat-header {
@@ -321,6 +327,17 @@
     #chatbot-widget .chat-input input:focus {
       outline: none;
       background-color: var(--light);
+    }
+
+    #price-predictor .predictor-window {
+      display: none;
+      width: 300px;
+      background-color: var(--light);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      bottom: 60px;
+      right: 0;
     }
 
     #price-predictor .predictor-window {
@@ -403,10 +420,53 @@
       color: var(--dark);
       cursor: pointer;
       transition: background-color 0.3s ease;
+      animation: fadeIn 0.3s ease-in;
     }
 
     #ai-suggestions .suggestion-btn:hover {
       background-color: var(--gray-light);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* AI-Powered Badge */
+    .ai-badge {
+      background-color: var(--secondary);
+      color: var(--dark);
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-left: 10px;
+      transition: opacity 0.3s ease;
+    }
+
+    .ai-badge.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Micro-copy enhancements */
+    .ai-micro-copy {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .ai-micro-copy:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--primary);
+      color: var(--light);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      z-index: 10;
     }
 
     /* Fixed margin and padding adjustments */
@@ -438,6 +498,132 @@
       margin-bottom: 30px;
     }
     
+    /* New AI Feature Styling */
+    .ai-feature-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      background-color: var(--light);
+      border-radius: 10px;
+    }
+
+    .ai-feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Modal Styling for AI Tools */
+    .ai-modal .modal-content {
+      background-color: var(--light);
+      border-radius: 10px;
+      border: none;
+    }
+
+    .ai-modal .modal-header {
+      background-color: var(--primary);
+      color: var(--light);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .ai-modal .modal-body {
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .ai-modal .btn-primary {
+      background-color: var(--secondary);
+      border: none;
+      color: var(--dark);
+    }
+
+    .ai-modal .btn-primary:hover {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+
+    /* File Upload Styling */
+    .file-upload {
+      border: 2px dashed var(--gray-light);
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      background-color: var(--gray-light);
+      cursor: pointer;
+    }
+
+    .file-upload:hover {
+      border-color: var(--secondary);
+    }
+
+    /* AI Results Styling */
+    .ai-result {
+      background-color: var(--gray-light);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .ai-result .highlight {
+      background-color: var(--secondary);
+      color: var(--dark);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    /* Neighborhood Matching Form */
+    .neighborhood-form input, .neighborhood-form select {
+      border-radius: 5px;
+      border: 1px solid var(--gray);
+      padding: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .neighborhood-result {
+      background-color: var(--light);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    /* Enhanced Listing Badges */
+    .listing-badge {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-right: 5px;
+    }
+
+    .listing-badge.authenticity {
+      background-color: var(--secondary);
+      color: var(--dark);
+    }
+
+    .listing-badge.safety {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+
+    /* Virtual Tour Sidebar */
+    .virtual-tour-sidebar {
+      background-color: var(--light);
+      padding: 15px;
+      border-left: 4px solid var(--secondary);
+      height: 100%;
+    }
+
+    /* Collapsible Negotiation Panel */
+    .negotiation-panel {
+      background-color: var(--gray-light);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .negotiation-panel.active {
+      display: block;
+    }
+
     @media (max-width: 768px) {
       .hero {
         padding: 80px 0;
@@ -467,6 +653,26 @@
       #ai-suggestions {
         justify-content: center;
       }
+
+      .ai-feature-card {
+        margin-bottom: 20px;
+      }
+
+      .ai-modal .modal-body {
+        padding: 15px;
+      }
+
+      .file-upload {
+        padding: 15px;
+      }
+
+      .virtual-tour-sidebar {
+        padding: 10px;
+      }
+
+      .neighborhood-form input, .neighborhood-form select {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -477,6 +683,7 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand text-primary" href="#">
           <i class="fas fa-exchange-alt me-2"></i>RentX
+          <span class="ai-badge" id="ai-badge">AI-POWERED</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
@@ -513,7 +720,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6 mb-4 mb-lg-0">
           <h1 class="display-4 fw-bold mb-4">Rent Anything. Anytime. Anywhere.</h1>
-          <p class="lead mb-4">Welcome to RentX – India's most trusted rental platform for everyday needs. Powered by AI, find personalized rentals from electronics to vehicles, fashion to party supplies.</p>
+          <p class="lead mb-4 ai-micro-copy" data-tooltip="Our AI finds the best rentals for you!">Welcome to RentX – India's most trusted rental platform for everyday needs. Powered by AI, find personalized rentals from electronics to vehicles, fashion to party supplies.</p>
           <div class="d-flex gap-3 mb-4">
             <a href="category.html#categories-section" class="btn hero-btn btn-lg px-4">Start Renting</a>
             <a href="add-product.html" class="btn hero-btn btn-lg px-4">List Your Item</a>
@@ -556,7 +763,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1610050110306-0ce72166f6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Designer Lehenga">
+                <img src="https://www.anitadongre.com/on/demandware.static/-/Sites-AD-INDIA-Library/default/dw1182ea62/images/Home%20page/April%202025/PLP_Lehenga_Set_WEB.jpg">
                 <div class="carousel-caption d-block">
                   <h5>Designer Lehenga</h5>
                   <p>Perfect for weddings and celebrations. ₹2,999/day.</p>
@@ -564,7 +771,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1607082349566-187b1f2f1145?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Embroidered Sherwani">
+                <img src="https://diwansaheb.com/cdn/shop/products/SW-2550_1800x1800.jpg?v=1672819083" class="d-block w-100" alt="Embroidered Sherwani">
                 <div class="carousel-caption d-block">
                   <h5>Embroidered Sherwani</h5>
                   <p>Elegant attire for grooms. ₹1,999/day.</p>
@@ -645,75 +852,12 @@
     </div>
   </div>
 
-  <!-- AI-Powered Recommendations -->
-  <section id="ai-recommendations">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="fw-bold">AI-Powered Rental Picks</h2>
-        <p class="text-muted">Discover rentals tailored just for you, powered by our AI recommendation engine.</p>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="card item-card h-100 shadow-sm">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Apartment" style="height: 200px; object-fit: cover;">
-              <span class="badge bg-secondary position-absolute top-0 end-0 m-3">AI Pick</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">2BHK Apartment</h5>
-              <p class="card-text text-muted small"><i class="fas fa-map-marker-alt me-1"></i> Bangalore, Karnataka</p>
-              <h5 class="text-primary mb-3">₹15,000 <small class="text-muted">/ month</small></h5>
-              <div class="d-flex justify-content-between border-top pt-3 text-muted small">
-                <span><i class="fas fa-calendar-alt me-1"></i> Min. 6 months</span>
-                <span><i class="fas fa-star me-1"></i> 4.8 (18)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card item-card h-100 shadow-sm">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1513696788257-645d2e614e63?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="DSLR Camera" style="height: 200px; object-fit: cover;">
-              <span class="badge bg-secondary position-absolute top-0 end-0 m-3">AI Pick</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Nikon DSLR Camera</h5>
-              <p class="card-text text-muted small"><i class="fas fa-map-marker-alt me-1"></i> Mumbai, Maharashtra</p>
-              <h5 class="text-primary mb-3">₹1,200 <small class="text-muted">/ day</small></h5>
-              <div class="d-flex justify-content-between border-top pt-3 text-muted small">
-                <span><i class="fas fa-calendar-alt me-1"></i> Min. 1 day</span>
-                <span><i class="fas fa-star me-1"></i> 4.9 (22)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card item-card h-100 shadow-sm">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1592925625596-6ae74b8b46aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Banquet Hall" style="height: 200px; object-fit: cover;">
-              <span class="badge bg-secondary position-absolute top-0 end-0 m-3">AI Pick</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Banquet Hall</h5>
-              <p class="card-text text-muted small"><i class="fas fa-map-marker-alt me-1"></i> Delhi</p>
-              <h5 class="text-primary mb-3">₹25,000 <small class="text-muted">/ day</small></h5>
-              <div class="d-flex justify-content-between border-top pt-3 text-muted small">
-                <span><i class="fas fa-calendar-alt me-1"></i> Min. 1 day</span>
-                <span><i class="fas fa-star me-1"></i> 4.7 (15)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- AI-Personalized Category Highlights -->
   <section id="ai-categories">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="fw-bold">Explore Categories for You</h2>
-        <p class="text-muted">Curated rental categories based on your preferences and location, powered by AI.</p>
+        <p class="text-muted ai-micro-copy" data-tooltip="Curated by AI for you!">Curated rental categories based on your preferences and location, powered by AI.</p>
       </div>
       <div class="row g-4">
         <div class="col-md-6 col-lg-3">
@@ -870,9 +1014,21 @@
               <h5 class="card-title">MacBook Pro 2023</h5>
               <p class="card-text text-muted small"><i class="fas fa-map-marker-alt me-1"></i> Bangalore, Karnataka</p>
               <h5 class="text-primary mb-3">₹999 <small class="text-muted">/ day</small></h5>
+              <div class="d-flex flex-wrap mb-2">
+                <span class="listing-badge authenticity">Authenticity: 94%</span>
+                <span class="listing-badge safety">Safety: High</span>
+              </div>
               <div class="d-flex justify-content-between border-top pt-3 text-muted small">
                 <span><i class="fas fa-calendar-alt me-1"></i> Min. 3 days</span>
                 <span><i class="fas fa-star me-1"></i> 4.9 (24)</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#virtualTourModal">Virtual Tour</button>
+                <button class="btn btn-outline-primary btn-sm" onclick="toggleNegotiation(this)">Negotiate Price</button>
+              </div>
+              <div class="negotiation-panel" id="negotiation-4">
+                <p><strong>Recommended Offer:</strong> ₹900/day</p>
+                <p><small>Market Avg: ₹1,050 | Tactic: Request short-term discount</small></p>
               </div>
             </div>
           </div>
@@ -887,23 +1043,50 @@
               <h5 class="card-title">Canon EOS R5</h5>
               <p class="card-text text-muted small"><i class="fas fa-map-marker-alt me-1"></i> Mumbai, Maharashtra</p>
               <h5 class="text-primary mb-3">₹1,499 <small class="text-muted">/ day</small></h5>
+              <div class="d-flex flex-wrap mb-2">
+                <span class="listing-badge authenticity">Authenticity: 96%</span>
+                <span class="listing-badge safety">Safety: Medium</span>
+              </div>
               <div class="d-flex justify-content-between border-top pt-3 text-muted small">
                 <span><i class="fas fa-calendar-alt me-1"></i> Min. 2 days</span>
                 <span><i class="fas fa-star me-1"></i> 4.8 (16)</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#virtualTourModal">Virtual Tour</button>
+                <button class="btn btn-outline-primary btn-sm" onclick="toggleNegotiation(this)">Negotiate Price</button>
+              </div>
+              <div class="negotiation-panel" id="negotiation-5">
+                <p><strong>Recommended Offer:</strong> ₹1,350/day</p>
+                <p><small>Market Avg: ₹1,600 | Tactic: Include extra accessories</small></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
           <div class="card item-card h-100 border-0 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Car" style="height: 200px; object-fit: cover;">
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Car" style="height: 200px; object-fit: cover;">
+              <span class="badge bg-secondary position-absolute top-0 end-0 m-3">Popular</span>
+            </div>
             <div class="card-body">
               <h5 class="card-title">Hyundai Creta 2022</h5>
               <p class="card-text text-muted small"><i class="fas fa-map-marker-alt me-1"></i> Delhi</p>
               <h5 class="text-primary mb-3">₹2,499 <small class="text-muted">/ day</small></h5>
+              <div class="d-flex flex-wrap mb-2">
+                <span class="listing-badge authenticity">Authenticity: 93%</span>
+                <span class="listing-badge safety">Safety: High</span>
+              </div>
               <div class="d-flex justify-content-between border-top pt-3 text-muted small">
                 <span><i class="fas fa-calendar-alt me-1"></i> Min. 7 days</span>
                 <span><i class="fas fa-star me-1"></i> 4.7 (32)</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#virtualTourModal">Virtual Tour</button>
+                <button class="btn btn-outline-primary btn-sm" onclick="toggleNegotiation(this)">Negotiate Price</button>
+              </div>
+              <div class="negotiation-panel" id="negotiation-6">
+                <p><strong>Recommended Offer:</strong> ₹2,300/day</p>
+                <p><small>Market Avg: ₹2,600 | Tactic: Request weekly rate</small></p>
               </div>
             </div>
           </div>
@@ -946,34 +1129,6 @@
             <div class="bg-primary text-white rounded-circle mx-auto mb-3" style="width: 60px; height: 60px; line-height: 60px; font-size: 24px; font-weight: 700;">4</div>
             <h4>Return & Review</h4>
             <p class="text-muted">Return the item after use and leave a review</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="fw-bold">What Our Customers Say</h2>
-        <p class="text-muted">Hear from people who have used RentX for their rental needs</p>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="card testimonial-card border-0 shadow-sm">
-            <div class="card-body p-4">
-              <blockquote class="blockquote mb-4 position-relative">
-                <p class="px-3">RentX saved me so much money when I needed a camera for my vacation. The process was seamless and the owner was very helpful. Will definitely use again!</p>
-              </blockquote>
-              <div class="d-flex align-items-center justify-content-center">
-                <img src="https://randomuser.me/api/portraits/women/43.jpg" class="rounded-circle me-3" width="60" height="60" alt="Priya Sharma">
-                <div>
-                  <h5 class="mb-0">Priya Sharma</h5>
-                  <p class="text-muted mb-0">Mumbai</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1039,42 +1194,22 @@
       </div>
       <hr class="my-4 border-secondary">
       <div class="text-center">
-        <p class="mb-0">© 2025 RentX. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p class="mb-0">© 2025 RentX. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- AI Widgets Container -->
+  <!-- Widget Container -->
   <div id="widget-container">
-    <!-- AI Price Predictor -->
-    <div id="price-predictor">
-      <button class="btn" id="predictor-toggle"><i class="fas fa-calculator"></i></button>
-      <div class="predictor-window" id="predictor-window">
-        <h5>AI Price Predictor</h5>
-        <select id="predictor-category">
-          <option selected>Select Item Category</option>
-          <option>Electronics</option>
-          <option>Vehicles</option>
-          <option>Fashion</option>
-          <option>Event & Party Supplies</option>
-        </select>
-        <input type="text" id="predictor-item" placeholder="Item Name (e.g., DSLR Camera)">
-        <input type="text" id="predictor-location" placeholder="Location (e.g., Bangalore)">
-        <button id="predict-price-btn">Predict Price</button>
-        <div id="price-result" class="mt-2"></div>
-      </div>
-    </div>
-
-    <!-- AI Chatbot Widget -->
     <div id="chatbot-widget">
-      <button class="btn" id="chatbot-toggle"><i class="fas fa-comment-dots"></i></button>
-      <div class="chat-window" id="chat-window">
+      <button id="chatbot-toggle" class="btn"><i class="fas fa-robot"></i></button>
+      <div class="chat-window">
         <div class="chat-header">RentX AI Assistant</div>
         <div class="chat-body" id="chat-body">
-          <div class="chat-message bot">Hi! I'm your AI assistant. How can I help you find the perfect rental today?</div>
+          <div class="chat-message bot">Hello! Welcome to RentX. How can I assist you today?</div>
         </div>
         <div class="chat-input">
-          <input type="text" id="chat-input" placeholder="Type your message...">
+          <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
         </div>
       </div>
     </div>
@@ -1083,255 +1218,67 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Search form handling with AI-driven autocomplete, image search, and AI suggestions
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchForm = document.querySelector('.search-form');
-      const categoryInput = document.getElementById('category');
-      const locationInput = document.getElementById('location');
-      const categorySuggestions = document.getElementById('category-suggestions');
-      const locationSuggestions = document.getElementById('location-suggestions');
-      const imageSearchInput = document.getElementById('image-search-input');
-      const aiSuggestions = document.getElementById('ai-suggestions');
-
-      // Mock AI-driven suggestions for autocomplete
-      const categoryOptions = [
-        'Electronics', 'Vehicles', 'Furniture', 'Tools & Equipment', 'Fashion',
-        'Sports', 'Real Estate', 'Event & Party Supplies', 'Construction & Industrial',
-        'Kitchen & Catering Equipment', 'Agriculture & Farming Equipment', 'Travel & Outdoor'
-      ];
-      const locationOptions = [
-        'Bangalore, Karnataka', 'Mumbai, Maharashtra', 'Delhi', 'Chennai, Tamil Nadu',
-        'Hyderabad, Telangana', 'Kolkata, West Bengal', 'Pune, Maharashtra'
-      ];
-
-      function showSuggestions(input, suggestionsContainer, options) {
-        const query = input.value.toLowerCase();
-        suggestionsContainer.innerHTML = '';
-        if (query.length < 2) {
-          suggestionsContainer.classList.add('d-none');
-          return;
-        }
-        const filtered = options.filter(opt => opt.toLowerCase().includes(query));
-        if (filtered.length === 0) {
-          suggestionsContainer.classList.add('d-none');
-          return;
-        }
-        filtered.forEach(opt => {
-          const div = document.createElement('div');
-          div.classList.add('suggestion-item');
-          div.textContent = opt;
-          div.addEventListener('click', () => {
-            input.value = opt;
-            suggestionsContainer.classList.add('d-none');
-            if (input === locationInput) {
-              generateAISuggestions(opt);
-            }
-          });
-          suggestionsContainer.appendChild(div);
-        });
-        suggestionsContainer.classList.remove('d-none');
-      }
-
-      categoryInput.addEventListener('input', () => {
-        showSuggestions(categoryInput, categorySuggestions, categoryOptions);
-      });
-
-      locationInput.addEventListener('input', () => {
-        showSuggestions(locationInput, locationSuggestions, locationOptions);
-        generateAISuggestions(locationInput.value);
-      });
-
-      // AI Suggestions for search refinement
-      function generateAISuggestions(query) {
-        const lowerQuery = query.toLowerCase();
-        let suggestions = [];
-        
-        // Clear previous suggestions but keep the "AI suggestions:" label
-        aiSuggestions.innerHTML = '<span>AI suggestions:</span>';
-
-        // Mock AI logic to generate suggestions based on query
-        if (lowerQuery.includes('mumbai') || lowerQuery.includes('bangalore') || lowerQuery.includes('delhi')) {
-          // If location is mentioned, suggest price filters and delivery options
-          suggestions.push('under ₹1000', 'with delivery');
-          
-          // Check category for more specific suggestions
-          const selectedCategory = categoryInput.value.toLowerCase();
-          if (selectedCategory.includes('electronics')) {
-            suggestions.push('DSLR cameras');
-          } else if (selectedCategory.includes('vehicles')) {
-            suggestions.push('with driver');
-          } else if (selectedCategory.includes('fashion')) {
-            suggestions.push('designer outfits');
-          }
-        } else if (lowerQuery.includes('camera')) {
-          suggestions.push('under ₹1000', 'with delivery', 'DSLR cameras');
-        } else if (lowerQuery.includes('wedding')) {
-          suggestions.push('under ₹5000', 'with setup', 'banquet halls');
-        } else if (lowerQuery.length > 2) {
-          // Generic suggestions for any query
-          suggestions.push('under ₹2000', 'same-day delivery');
-        }
-
-        // Add suggestion buttons
-        suggestions.forEach(suggestion => {
-          const btn = document.createElement('button');
-          btn.classList.add('suggestion-btn');
-          btn.textContent = suggestion;
-          btn.addEventListener('click', () => {
-            // Mock search refinement (in a real app, this would modify the search query or filters)
-            alert(`Refining search with: ${suggestion}`);
-            locationInput.value = `${locationInput.value} ${suggestion}`;
-            generateAISuggestions(locationInput.value); // Update suggestions based on new query
-          });
-          aiSuggestions.appendChild(btn);
-        });
-      }
-
-      // Image search handling
-      imageSearchInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          // Mock AI image recognition
-          alert(`AI analyzing image... Recognized item: Camera. Redirecting to camera rentals.`);
-          // In a real app, send the image to an AI API for recognition
-          categoryInput.value = 'Electronics';
-          generateAISuggestions('camera');
-        }
-      });
-
-      // Close suggestions when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!categorySuggestions.contains(e.target) && e.target !== categoryInput) {
-          categorySuggestions.classList.add('d-none');
-        }
-        if (!locationSuggestions.contains(e.target) && e.target !== locationInput) {
-          locationSuggestions.classList.add('d-none');
-        }
-      });
-
-      searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const category = categoryInput.value;
-        const location = locationInput.value;
-        
-        if (!category || !location) {
-          alert('Please fill in all search fields');
-          return;
-        }
-        
-        alert(`Searching for ${category} in ${location}. This would redirect to search results in a real app.`);
-      });
-
-      // Newsletter form handling
-      const newsletterForm = document.querySelector('.newsletter-form');
-      if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const email = newsletterForm.querySelector('input').value;
-          
-          if (!email.includes('@')) {
-            alert('Please enter a valid email address');
-            return;
-          }
-          
-          alert(`Thank you for subscribing with ${email}! You'll hear from us soon.`);
-          newsletterForm.reset();
-        });
-      }
-
-      // AI Chatbot handling
+    // Chatbot functionality
+    document.addEventListener('DOMContentLoaded', () => {
       const chatbotToggle = document.getElementById('chatbot-toggle');
-      const chatWindow = document.getElementById('chat-window');
-      const chatBody = document.getElementById('chat-body');
+      const chatWindow = document.querySelector('#chatbot-widget .chat-window');
       const chatInput = document.getElementById('chat-input');
+      const chatBody = document.getElementById('chat-body');
 
+      // Toggle chat window visibility
       chatbotToggle.addEventListener('click', () => {
-        chatWindow.style.display = chatWindow.style.display === 'block' ? 'none' : 'block';
-        if (chatWindow.style.display === 'block') {
-          document.getElementById('predictor-window').style.display = 'none';
-        }
+        chatWindow.classList.toggle('active');
       });
 
+      // Handle message sending
       chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && chatInput.value.trim()) {
-          const userMessage = chatInput.value.trim();
-          appendMessage('user', userMessage);
+        if (e.key === 'Enter' && chatInput.value.trim() !== '') {
+          sendMessage(chatInput.value.trim());
           chatInput.value = '';
-
-          // Mock AI response
-          setTimeout(() => {
-            const botResponse = generateBotResponse(userMessage);
-            appendMessage('bot', botResponse);
-          }, 500);
         }
       });
 
-      function appendMessage(sender, message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('chat-message', sender);
-        messageDiv.textContent = message;
-        chatBody.appendChild(messageDiv);
-        chatBody.scrollTop = chatBody.scrollHeight;
+      // Function to send user message and get bot response
+      function sendMessage(message) {
+        // Add user message
+        const userMessage = document.createElement('div');
+        userMessage.className = 'chat-message user';
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+
+        // Simulate bot response
+        setTimeout(() => {
+          const botResponse = getBotResponse(message);
+          const botMessage = document.createElement('div');
+          botMessage.className = 'chat-message bot';
+          botMessage.textContent = botResponse;
+          chatBody.appendChild(botMessage);
+
+          // Scroll to bottom
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 500);
       }
 
-      function generateBotResponse(message) {
+      // Simple bot response logic
+      function getBotResponse(message) {
         const lowerMessage = message.toLowerCase();
-        if (lowerMessage.includes('wedding')) {
-          return 'Looking for wedding rentals? I recommend checking out our Designer Lehenga or Wedding Decoration Set! Want me to search for more options?';
-        } else if (lowerMessage.includes('camera')) {
-          return 'Interested in cameras? The Canon EOS R5 is a great pick at ₹1,499/day. Should I find similar items in your area?';
-        } else if (lowerMessage.includes('car') || lowerMessage.includes('vehicle')) {
-          return 'Need a vehicle? The Hyundai Creta 2022 is available for ₹2,499/day. Let me know your location for more options!';
-        } else if (lowerMessage.includes('price') || lowerMessage.includes('list')) {
-          return 'Want to list an item? Try our AI Price Predictor tool to get the best rental price! Just click the calculator icon next to me.';
+        if (lowerMessage.includes('rent')) {
+          return 'Looking to rent something? Browse our categories like Electronics, Vehicles, or Fashion on the homepage!';
+        } else if (lowerMessage.includes('help')) {
+          return 'I’m here to assist! You can ask about renting items, listing your own, or navigating RentX.';
+        } else if (lowerMessage.includes('category') || lowerMessage.includes('categories')) {
+          return 'We have a variety of categories including Electronics, Vehicles, Furniture, Fashion, and more. Check them out in the "Explore Categories" section!';
         } else {
-          return 'I can help you find rentals for electronics, fashion, vehicles, and more! What are you looking for today?';
-        }
-      }
-
-      // AI Price Predictor handling
-      const predictorToggle = document.getElementById('predictor-toggle');
-      const predictorWindow = document.getElementById('predictor-window');
-      const predictPriceBtn = document.getElementById('predict-price-btn');
-      const priceResult = document.getElementById('price-result');
-
-      predictorToggle.addEventListener('click', () => {
-        predictorWindow.style.display = predictorWindow.style.display === 'block' ? 'none' : 'block';
-        if (predictorWindow.style.display === 'block') {
-          chatWindow.style.display = 'none';
-        }
-      });
-
-      predictPriceBtn.addEventListener('click', () => {
-        const category = document.getElementById('predictor-category').value;
-        const item = document.getElementById('predictor-item').value;
-        const location = document.getElementById('predictor-location').value;
-
-        if (!category || !item || !location) {
-          priceResult.textContent = 'Please fill in all fields.';
-          return;
-        }
-
-        // Mock AI price prediction
-        const predictedPrice = generatePredictedPrice(category, item, location);
-        priceResult.textContent = `Suggested rental price: ${predictedPrice}`;
-      });
-
-      function generatePredictedPrice(category, item, location) {
-        // Mock pricing logic
-        if (category === 'Electronics' && item.toLowerCase().includes('camera')) {
-          return '₹1,200 - ₹1,800/day';
-        } else if (category === 'Fashion' && item.toLowerCase().includes('lehenga')) {
-          return '₹2,500 - ₹3,500/day';
-        } else if (category === 'Vehicles') {
-          return '₹2,000 - ₹3,000/day';
-        } else if (category === 'Event & Party Supplies') {
-          return '₹4,000 - ₹6,000/day';
-        } else {
-          return '₹1,000 - ₹2,000/day';
+          return 'Sorry, I didn’t quite catch that. Could you clarify or ask about renting, categories, or listing items?';
         }
       }
     });
+
+    // Toggle negotiation panel (existing function from original code)
+    function toggleNegotiation(button) {
+      const panel = button.parentElement.nextElementSibling;
+      panel.classList.toggle('active');
+    }
   </script>
 </body>
 </html>

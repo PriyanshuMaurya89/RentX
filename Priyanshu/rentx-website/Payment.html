@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Securely complete your payment for renting items with RentX, India's trusted rental platform.">
+  <title>RentX - Secure Payment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B3C34;
+      --secondary: #D4A017;
+      --dark: #1A1A1A;
+      --light: #F8F1E9;
+      --gray: #6B7280;
+      --gray-light: #E5E7EB;
+      --accent: #E6F0FA;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .logo .badge {
+      background-color: var(--secondary);
+      color: var(--dark);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .logo .badge:hover {
+      transform: scale(1.1);
+    }
+    .nav-links a {
+      color: var(--dark);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.9rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary);
+    }
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: var(--light);
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 4rem;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      animation: slideIn 1s ease-out;
+    }
+    .hero-section .lock-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23F8F1E9"><path d="M12 2C9.243 2 7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3v3H9V7c0-1.654 1.346-3 3-3zm-7 7h14v8H5v-8z"/></svg>') no-repeat center;
+      margin-right: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .payment-section {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      animation: fadeIn 1s ease-out;
+    }
+    .payment-details, .order-summary {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .payment-details:hover, .order-summary:hover {
+      transform: translateY(-8px);
+    }
+    .payment-details h2, .order-summary h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 0.5rem;
+    }
+    .address-info {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--gray-light);
+      border-radius: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .address-info:hover {
+      background: var(--accent);
+    }
+    .address-info a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .address-info a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+    .promo-code {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--accent);
+      border-radius: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .promo-code input {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      width: 70%;
+      font-size: 0.9rem;
+      transition: box-shadow 0.3s ease;
+    }
+    .promo-code input:focus {
+      box-shadow: 0 0 0 3px rgba(27, 60, 52, 0.2);
+      outline: none;
+    }
+    .promo-code button {
+      background-color: var(--primary);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .promo-code button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: all 0.5s ease;
+    }
+    .promo-code button:hover::before {
+      left: 100%;
+    }
+    .promo-code button:hover {
+      background-color: #2D5A4E;
+      transform: scale(1.05);
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      animation: slideIn 0.5s ease-out;
+    }
+    .payment-option:hover {
+      background: var(--gray-light);
+      transform: translateX(5px);
+    }
+    .payment-option input {
+      margin-right: 0.75rem;
+    }
+    .payment-option label {
+      flex-grow: 1;
+      padding: 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .payment-option input:checked + label {
+      border-color: var(--primary);
+      background-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(27, 60, 52, 0.2);
+      transform: scale(1.02);
+    }
+    .payment-option label:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(27, 60, 52, 0.1);
+    }
+    .payment-option .icons img {
+      height: 1.5rem;
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+    .payment-option .icons img:hover {
+      transform: scale(1.2);
+    }
+    .order-summary {
+      position: sticky;
+      top: 6rem;
+      animation: slideInRight 1s ease-out;
+    }
+    .order-summary div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .order-summary .total {
+      font-weight: bold;
+      color: var(--primary);
+      border-top: 2px solid var(--gray-light);
+      padding-top: 0.75rem;
+      font-size: 1rem;
+    }
+    .order-summary a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.3s;
+    }
+    .order-summary a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+    .use-button {
+      background-color: var(--secondary);
+      color: var(--dark);
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      width: 100%;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .use-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: all 0.5s ease;
+    }
+    .use-button:hover::before {
+      left: 100%;
+    }
+    .use-button:hover {
+      background-color: #E5B623;
+      box-shadow: 0 6px 20px rgba(212, 160, 23, 0.3);
+      transform: scale(1.05);
+    }
+    .use-button:disabled {
+      background-color: var(--gray-light);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .message {
+      margin-top: 1rem;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in;
+    }
+    .success {
+      color: #10B981;
+      font-weight: 500;
+    }
+    .error {
+      color: #EF4444;
+      font-weight: 500;
+    }
+    footer {
+      background-color: var(--primary);
+      color: var(--light);
+      padding: 3rem 0;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .footer-container h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .footer-container ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-container ul li a {
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-container ul li a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+    .newsletter input {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem 0 0 0.5rem;
+      width: 70%;
+      font-size: 0.9rem;
+    }
+    .newsletter button {
+      background-color: var(--secondary);
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .newsletter button:hover {
+      background-color: #E5B623;
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--gray-light);
+      font-size: 0.875rem;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    @media (max-width: 768px) {
+      .payment-section {
+        flex-direction: column;
+      }
+      .order-summary {
+        position: static;
+        top: auto;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        padding: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .nav-links.active a {
+        margin: 0.5rem 0;
+      }
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      .payment-details, .order-summary {
+        padding: 1.5rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .hero-section {
+        padding: 3rem 0;
+      }
+      .promo-code {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .promo-code input, .promo-code button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <i class="fas fa-exchange-alt"></i>
+        <span>RentX</span>
+        <span class="badge">AI-POWERED</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="category.html">Categories</a>
+        <a href="how-it-works.html">How it Works</a>
+        <a href="contact.html">Contact</a>
+        <a href="logout.html" class="logout-btn">Logout</a>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </nav>
+  </header>
+
+  <section class="hero-section" aria-label="Secure checkout">
+    <div class="container">
+      <h1><span class="lock-icon"></span>Secure Checkout</h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="payment-section">
+      <div class="payment-details">
+        <h2><i class="fas fa-map-marker-alt me-2" aria-hidden="true"></i>1. Delivery Address</h2>
+        <div class="address-info">
+          <p id="userName">John Doe</p>
+          <p id="userAddress">123 Main St, Bangalore, Karnataka 560001</p>
+          <a href="#">Change</a>
+        </div>
+
+        <h2><i class="fas fa-credit-card me-2" aria-hidden="true"></i>2. Choose Payment Method</h2>
+
+        <div class="promo-code">
+          <input type="text" id="promoCode" placeholder="Enter promo code">
+          <button onclick="applyPromo()">Apply</button>
+        </div>
+
+        <div class="payment-option">
+          <input type="radio" id="creditCard" name="paymentMethod" value="credit-card" onchange="updatePaymentMethod()">
+          <label for="creditCard">
+            <div>
+              <h3>Credit & Debit Cards</h3>
+              <p>Bajaj Finserv •••• 8332</p>
+              <p>₹4997 EMI for 3 Months [No Cost EMI]</p>
+              <p>Total: ₹14,990 (₹1,666/month)</p>
+            </div>
+            <div class="icons">
+              <img src="https://img.icons8.com/color/24/visa.png" alt="Visa">
+              <img src="https://img.icons8.com/color/24/mastercard.png" alt="Mastercard">
+            </div>
+          </label>
+        </div>
+
+        <div class="payment-option">
+          <input type="radio" id="upi" name="paymentMethod" value="upi" onchange="updatePaymentMethod()">
+          <label for="upi">
+            <div>
+              <h3>UPI</h3>
+              <p>Amazon Pay UPI ••••• 9853</p>
+              <p>Union Bank of India ••••• 9853</p>
+            </div>
+            <div class="icons">
+              <img src="https://img.icons8.com/color/24/google-pay.png" alt="Google Pay">
+              <img src="https://i.pinimg.com/736x/db/42/53/db4253052cfc0f80ac281486c19f9d57.jpg" alt="PhonePe">
+            </div>
+          </label>
+        </div>
+
+        <div class="payment-option">
+          <input type="radio" id="other" name="paymentMethod" value="other" onchange="updatePaymentMethod()">
+          <label for="other">
+            <div>
+              <h3>Other Payment Methods</h3>
+              <p>Add new credit or debit card</p>
+            </div>
+          </label>
+        </div>
+
+        <p id="errorMessage" class="error" style="display: none;">Please select a payment method to proceed.</p>
+      </div>
+
+      <div class="order-summary">
+        <h2><i class="fas fa-shopping-cart me-2" aria-hidden="true"></i>Order Summary</h2>
+        <div>
+          <span>Item Cost:</span>
+          <span id="itemCost">₹6,500.00</span>
+        </div>
+        <div>
+          <span>Delivery Fee:</span>
+          <span id="deliveryFee">₹100.00</span>
+        </div>
+        <div class="total">
+          <span>Total:</span>
+          <span id="totalCost">₹6,600.00</span>
+        </div>
+        <a href="#">How is the delivery fee calculated?</a>
+        <button id="useButton" class="use-button" onclick="processPayment()" disabled>Use this payment method</button>
+        <p id="message" class="message"></p>
+      </div>
+    </div>
+    <p class="text-center text-gray-500 text-sm mt-4">You still have a chance to review and make changes to your order before finalizing it.</p>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h4><i class="fas fa-exchange-alt me-2" aria-hidden="true"></i>RentX</h4>
+        <p>India's premier rental platform connecting renters with trusted lenders.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="category.html">Categories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Categories</h5>
+        <ul>
+          <li><a href="fashion.html">Fashion</a></li>
+          <li><a href="#">Electronics</a></li>
+          <li><a href="#">Furniture</a></li>
+        </ul>
+      </div>
+      <div class="newsletter">
+        <h5>Newsletter</h5>
+        <p>Stay updated with new items and offers.</p>
+        <div>
+          <input type="email" placeholder="Your email address">
+          <button><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© 2025 RentX. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Initialize items data
+    const items = [
+      { _id: 'bridal-lehenga', title: 'Bridal Lehenga', price: 6500 },
+      { _id: 'designer-gown', title: 'Designer Gown', price: 4500 },
+      { _id: 'sherwani', title: 'Sherwani', price: 5000 },
+      { _id: 'black-tuxedo', title: 'Classic Black Tuxedo', price: 4000 },
+      { _id: 'cocktail-dress', title: 'Cocktail Dress', price: 5500 },
+      { _id: 'premium-suit', title: 'Premium Suit', price: 4500 }
+    ];
+
+    // Load user and booking data
+    let user = JSON.parse(localStorage.getItem('user')) || { name: 'John Doe', address: '123 Main St, Bangalore, Karnataka 560001' };
+    document.getElementById('userName').textContent = user.name;
+    document.getElementById('userAddress').textContent = user.address;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const booking = {
+      itemId: urlParams.get('item') || 'bridal-lehenga',
+      startDate: urlParams.get('startDate') || '2025-05-01',
+      endDate: urlParams.get('endDate') || '2025-05-04',
+      deliveryMethod: urlParams.get('deliveryMethod') || 'owner-delivery'
+    };
+    const deliveryFee = parseInt(localStorage.getItem('deliveryFee')) || (booking.deliveryMethod === 'self-pickup' ? 0 : booking.deliveryMethod === 'owner-delivery' ? 100 : 150);
+
+    // Update order summary
+    let item = items.find(i => i._id === booking.itemId) || items[0];
+    let orderTotal = item.price; // Fixed price for 4 days
+    document.getElementById('itemCost').textContent = `₹${orderTotal.toLocaleString('en-IN')}.00`;
+    document.getElementById('deliveryFee').textContent = `₹${deliveryFee.toLocaleString('en-IN')}.00`;
+    document.getElementById('totalCost').textContent = `₹${(orderTotal + deliveryFee).toLocaleString('en-IN')}.00`;
+
+    // Payment method handling
+    let selectedPayment = '';
+    function updatePaymentMethod() {
+      let selected = document.querySelector('input[name="paymentMethod"]:checked');
+      selectedPayment = selected ? selected.value : '';
+      document.getElementById('useButton').disabled = !selectedPayment;
+      document.getElementById('errorMessage').style.display = selectedPayment ? 'none' : 'block';
+    }
+
+    // Promo code handling
+    function applyPromo() {
+      let code = document.getElementById('promoCode').value;
+      let message = document.getElementById('message');
+      if (code === 'RENT10') {
+        orderTotal = Math.round(orderTotal * 0.9); // Apply 10% discount
+        document.getElementById('itemCost').textContent = `₹${orderTotal.toLocaleString('en-IN')}.00`;
+        document.getElementById('totalCost').textContent = `₹${(orderTotal + deliveryFee).toLocaleString('en-IN')}.00`;
+        message.textContent = 'Promo code applied! 10% discount applied.';
+        message.className = 'message success';
+      } else {
+        message.textContent = 'Invalid promo code.';
+        message.className = 'message error';
+      }
+    }
+
+    // Process payment
+    function processPayment() {
+      if (!selectedPayment) {
+        document.getElementById('message').textContent = 'Please select a payment method.';
+        document.getElementById('message').className = 'message error';
+        return;
+      }
+      document.getElementById('message').textContent = 'Payment processed successfully. Redirecting...';
+      document.getElementById('message').className = 'message success';
+      document.getElementById('useButton').disabled = true;
+      localStorage.removeItem('booking');
+      localStorage.removeItem('selectedDelivery');
+      localStorage.removeItem('deliveryFee');
+      setTimeout(() => {
+        window.location.href = 'renter-profile.html';
+      }, 2000);
+    }
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      let navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+
+    // Initial call to set payment method state
+    updatePaymentMethod();
+  </script>
+</body>
+</html>

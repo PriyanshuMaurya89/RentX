@@ -63,18 +63,20 @@
       background-color: var(--light);
       border-radius: 10px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 30px;
     }
     
     .form-container:hover {
       transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     }
     
     .form-control, .form-select {
       border: 1px solid var(--gray-light);
       border-radius: 8px;
       background-color: var(--light);
+      transition: border-color 0.3s ease, background-color 0.3s ease;
     }
     
     .form-control:focus, .form-select:focus {
@@ -88,12 +90,26 @@
       color: var(--dark);
       border-radius: 8px;
       font-family: 'Playfair Display', serif;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     
     .submit-btn:hover {
       background-color: var(--primary);
       color: var(--light);
+    }
+    
+    .image-upload {
+      border: 2px dashed var(--gray-light);
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      background-color: var(--gray-light);
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+    
+    .image-upload:hover {
+      border-color: var(--secondary);
     }
     
     .image-preview {
@@ -109,6 +125,11 @@
       object-fit: cover;
       border-radius: 5px;
       border: 1px solid var(--gray-light);
+      transition: transform 0.3s ease;
+    }
+    
+    .image-preview img:hover {
+      transform: scale(1.05);
     }
     
     .breadcrumb {
@@ -147,20 +168,47 @@
       font-size: 0.85rem;
     }
     
-    /* Prevent red border on load */
-    .form-control:invalid:not(:focus):not(.is-invalid),
-    .form-select:invalid:not(:focus):not(.is-invalid) {
-      border-color: var(--gray-light);
-      background-image: none;
+    .form-label.required::after {
+      content: '*';
+      color: var(--secondary);
+      margin-left: 5px;
     }
     
-    /* Progress bar */
-    .progress {
+    .form-label {
       position: relative;
+      cursor: pointer;
+    }
+    
+    .form-label:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--primary);
+      color: var(--light);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    
+    .progress {
+      height: 30px;
+      border-radius: 15px;
+      background-color: var(--gray-light);
+      position: relative;
+      overflow: hidden;
     }
     
     .progress-bar {
       transition: width 0.3s ease;
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
     }
     
     .progress-bar.success {
@@ -168,9 +216,31 @@
       color: var(--dark);
     }
     
+    .nav-link {
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--secondary);
+    }
+    
     @media (max-width: 768px) {
       .form-container {
         padding: 20px;
+      }
+      
+      .progress {
+        height: 25px;
+      }
+      
+      .image-upload {
+        padding: 15px;
+      }
+      
+      .form-label:hover::after {
+        display: none; /* Hide tooltips on mobile for better UX */
       }
     }
   </style>
@@ -189,7 +259,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link active" href="index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="category.html">Categories</a>
@@ -224,56 +294,58 @@
       </nav>
       
       <h2 class="fw-bold text-center mb-4">List Your Item for Rent</h2>
-      <p class="text-center text-muted mb-5">Fill out the details below to list your item on RentX and start earning!</p>
+      <p class="text-center text-muted mb-5">Share your item with the RentX community and start earning today!</p>
       
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="form-container">
             <form id="listItemForm" class="needs-validation" novalidate>
               <div class="progress mb-4">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progressBar">Step 0/8</div>
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progressBar">0%</div>
               </div>
               
               <!-- Item Name -->
               <div class="mb-3">
-                <label for="itemName" class="form-label">Item Name <span class="text-danger">*</span></label>
+                <label for="itemName" class="form-label required" data-tooltip="Enter a clear and descriptive name">Item Name</label>
                 <input type="text" class="form-control" id="itemName" placeholder="e.g., MacBook Pro 2023" required>
                 <div class="invalid-feedback">Please enter the item name.</div>
               </div>
               
               <!-- Category -->
               <div class="mb-3">
-                <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+                <label for="category" class="form-label required" data-tooltip="Choose the best category for your item">Category</label>
                 <select class="form-select" id="category" required>
                   <option value="" selected disabled>Select Category</option>
                   <option value="Electronics">Electronics</option>
                   <option value="Vehicles">Vehicles</option>
                   <option value="Furniture">Furniture</option>
                   <option value="Tools & Equipment">Tools & Equipment</option>
-                  <option value="Party Supplies">Party Supplies</option>
+                  <option value="Party Supplies">Event & Party Supplies</option>
                   <option value="Fashion">Fashion</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Real Estate">Real Estate</option>
                 </select>
                 <div class="invalid-feedback">Please select a category.</div>
               </div>
               
               <!-- Description -->
               <div class="mb-3">
-                <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="description" rows="4" placeholder="Describe your item..." required maxlength="500"></textarea>
+                <label for="description" class="form-label required" data-tooltip="Describe your item in detail">Description</label>
+                <textarea class="form-control" id="description" rows="4" placeholder="Describe your item, condition, and any special features..." required maxlength="500"></textarea>
                 <div class="character-count text-end"><span id="charCount">0</span>/500</div>
                 <div class="invalid-feedback">Please provide a description.</div>
               </div>
               
               <!-- Price -->
               <div class="mb-3">
-                <label for="price" class="form-label">Rental Price (₹/day) <span class="text-danger">*</span></label>
+                <label for="price" class="form-label required" data-tooltip="Set a competitive daily rental price">Rental Price (₹/day)</label>
                 <input type="number" class="form-control" id="price" placeholder="e.g., 999" min="1" required>
                 <div class="invalid-feedback">Please enter a valid price.</div>
               </div>
               
               <!-- Availability -->
               <div class="mb-3">
-                <label class="form-label">Availability <span class="text-danger">*</span></label>
+                <label class="form-label required" data-tooltip="Select when your item is available">Availability</label>
                 <div class="row">
                   <div class="col-md-6">
                     <input type="date" class="form-control" id="startDate" required>
@@ -288,15 +360,18 @@
               
               <!-- Location -->
               <div class="mb-3">
-                <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+                <label for="location" class="form-label required" data-tooltip="Enter the city or area where the item is located">Location</label>
                 <input type="text" class="form-control" id="location" placeholder="e.g., Bangalore, Karnataka" required>
                 <div class="invalid-feedback">Please enter the item location.</div>
               </div>
               
               <!-- Images -->
               <div class="mb-3">
-                <label for="images" class="form-label">Upload Images (up to 3) <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" id="images" accept="image/*" multiple required>
+                <label for="images" class="form-label required" data-tooltip="Upload clear images of your item">Upload Images (up to 3)</label>
+                <div class="image-upload">
+                  <p><i class="fas fa-cloud-upload-alt me-2"></i>Drag and drop or click to upload images</p>
+                  <input type="file" class="form-control" id="images" accept="image/*" multiple required style="display: none;">
+                </div>
                 <div class="invalid-feedback">Please upload at least one image.</div>
                 <div class="image-preview" id="imagePreview"></div>
               </div>
@@ -371,6 +446,7 @@
       const form = document.getElementById('listItemForm');
       const submitBtn = document.getElementById('submitBtn');
       const imageInput = document.getElementById('images');
+      const imageUpload = document.querySelector('.image-upload');
       const imagePreview = document.getElementById('imagePreview');
       const description = document.getElementById('description');
       const charCount = document.getElementById('charCount');
@@ -378,12 +454,12 @@
       const endDate = document.getElementById('endDate');
       const category = document.getElementById('category');
       const progressBar = document.getElementById('progressBar');
+      const today = new Date().toISOString().split('T')[0];
 
       // Set minimum date for startDate to today
-      const today = new Date().toISOString().split('T')[0];
       startDate.min = today;
 
-      // Form fields and step names
+      // Form fields for progress tracking
       const fields = [
         { element: document.getElementById('itemName'), name: 'Item Name' },
         { element: category, name: 'Category' },
@@ -398,64 +474,117 @@
       // Update progress bar
       function updateProgress() {
         let validFields = 0;
+
         fields.forEach(field => {
           const { element } = field;
           if (element === imageInput) {
-            if (element.files.length > 0) validFields++;
+            // Check if at least one valid image is uploaded
+            if (element.files.length > 0 && Array.from(element.files).every(file => file.type.startsWith('image/'))) {
+              validFields++;
+            }
           } else if (element === description) {
-            if (element.value.trim().length > 0) validFields++;
+            // Check if description is non-empty and within length
+            if (element.value.trim().length > 0 && element.value.length <= 500) {
+              validFields++;
+            }
           } else if (element === category) {
-            if (element.value && element.value !== '') validFields++;
+            // Check if a valid category is selected
+            if (element.value && element.value !== '') {
+              validFields++;
+            }
+          } else if (element === startDate) {
+            // Check if start date is valid and not in the past
+            if (element.value && element.value >= today) {
+              validFields++;
+            }
+          } else if (element === endDate) {
+            // Check if end date is valid and after start date
+            if (element.value && startDate.value && element.value >= startDate.value) {
+              validFields++;
+            }
           } else {
-            if (element.value && element.checkValidity()) validFields++;
+            // Check if other fields are non-empty and valid
+            if (element.value.trim() && element.checkValidity()) {
+              validFields++;
+            }
           }
         });
 
+        // Calculate progress percentage
         const progress = (validFields / fields.length) * 100;
         progressBar.style.width = `${progress}%`;
         progressBar.setAttribute('aria-valuenow', progress);
 
+        // Update progress bar text
         if (validFields === fields.length) {
-          progressBar.textContent = `Step ${validFields}/${fields.length}: ${fields[validFields - 1].name}`;
-        } else if (validFields > 0) {
-          progressBar.textContent = `Step ${validFields}/${fields.length}: ${fields[validFields - 1].name}`;
+          progressBar.textContent = '100% - Complete';
+          progressBar.classList.add('success');
         } else {
-          progressBar.textContent = `Step 0/${fields.length}`;
+          progressBar.textContent = `${Math.round(progress)}% - ${validFields}/${fields.length} Fields`;
+          progressBar.classList.remove('success');
         }
       }
 
-      // Add input listeners to all fields
+      // Add event listeners to all fields
       fields.forEach(field => {
         field.element.addEventListener('input', updateProgress);
         field.element.addEventListener('change', updateProgress);
+        field.element.addEventListener('blur', updateProgress);
       });
 
-      // Bootstrap form validation
+      // Drag and drop for image upload
+      imageUpload.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = 'var(--secondary)';
+      });
+
+      imageUpload.addEventListener('dragleave', function() {
+        this.style.borderColor = 'var(--gray-light)';
+      });
+
+      imageUpload.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.style.borderColor = 'var(--gray-light)';
+        imageInput.files = e.dataTransfer.files;
+        imageInput.dispatchEvent(new Event('change'));
+      });
+
+      imageUpload.addEventListener('click', function() {
+        imageInput.click();
+      });
+
+      // Form submission
       form.addEventListener('submit', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        
-        // Manually validate dates
+
+        // Validate dates
+        let isValid = true;
         if (startDate.value && startDate.value < today) {
           startDate.classList.add('is-invalid');
           startDate.nextElementSibling.textContent = 'Start date cannot be in the past.';
-        } else if (startDate.value && endDate.value && endDate.value < startDate.value) {
-          endDate.classList.add('is-invalid');
-          endDate.nextElementSibling.textContent = 'End date must be after start date.';
+          isValid = false;
         } else {
           startDate.classList.remove('is-invalid');
+        }
+
+        if (startDate.value && endDate.value && endDate.value < startDate.value) {
+          endDate.classList.add('is-invalid');
+          endDate.nextElementSibling.textContent = 'End date must be after start date.';
+          isValid = false;
+        } else {
           endDate.classList.remove('is-invalid');
         }
 
-        if (form.checkValidity() && !startDate.classList.contains('is-invalid') && !endDate.classList.contains('is-invalid')) {
+        if (form.checkValidity() && isValid) {
           submitBtn.disabled = true;
           submitBtn.textContent = 'Submitting...';
-          
+
           // Simulate API call
           setTimeout(() => {
             progressBar.style.width = '100%';
             progressBar.setAttribute('aria-valuenow', 100);
-            progressBar.textContent = 'Success';
+            progressBar.textContent = '100% - Success';
             progressBar.classList.add('success');
 
             // Show success message
@@ -464,7 +593,7 @@
             successMessage.textContent = 'Item listed successfully!';
             form.appendChild(successMessage);
 
-            // Reset form after 2 seconds
+            // Reset form
             setTimeout(() => {
               form.reset();
               imagePreview.innerHTML = '';
@@ -472,16 +601,17 @@
               form.classList.remove('was-validated');
               progressBar.style.width = '0%';
               progressBar.setAttribute('aria-valuenow', 0);
-              progressBar.textContent = `Step 0/${fields.length}`;
+              progressBar.textContent = '0% - 0/8 Fields';
               progressBar.classList.remove('success');
               submitBtn.disabled = false;
               submitBtn.textContent = 'List Item';
               successMessage.remove();
-              startDate.min = today; // Reset min date
+              startDate.min = today;
+              updateProgress();
             }, 2000);
           }, 1000);
         }
-        
+
         form.classList.add('was-validated');
       });
 
@@ -489,13 +619,13 @@
       imageInput.addEventListener('change', function() {
         imagePreview.innerHTML = '';
         const files = this.files;
-        
+
         if (files.length > 3) {
           alert('You can upload a maximum of 3 images.');
           this.value = '';
           return;
         }
-        
+
         for (const file of files) {
           if (!file.type.startsWith('image/')) {
             alert('Please upload valid image files.');
@@ -503,7 +633,7 @@
             imagePreview.innerHTML = '';
             return;
           }
-          
+
           const img = document.createElement('img');
           img.src = URL.createObjectURL(file);
           imagePreview.appendChild(img);
@@ -518,9 +648,10 @@
           this.value = this.value.slice(0, 500);
           charCount.textContent = '500';
         }
+        updateProgress();
       });
 
-      // Date validation on blur
+      // Date validation
       startDate.addEventListener('blur', function() {
         if (this.value && this.value < today) {
           this.classList.add('is-invalid');
@@ -534,7 +665,7 @@
         }
         updateProgress();
       });
-      
+
       endDate.addEventListener('blur', function() {
         if (this.value && startDate.value && this.value < startDate.value) {
           this.classList.add('is-invalid');
@@ -546,18 +677,19 @@
         updateProgress();
       });
 
-      // Clear invalid state on input
       startDate.addEventListener('input', function() {
         this.classList.remove('is-invalid');
         this.nextElementSibling.textContent = 'Please select a start date.';
+        updateProgress();
       });
-      
+
       endDate.addEventListener('input', function() {
         this.classList.remove('is-invalid');
         this.nextElementSibling.textContent = 'Please select an end date.';
+        updateProgress();
       });
 
-      // Initialize progress on load
+      // Initialize progress
       updateProgress();
     });
   </script>

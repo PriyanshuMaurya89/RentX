@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Step into glamour with StyleX, your destination for renting dreamy women's fashion. From bridal lehengas to chic party dresses, shine effortlessly.">
+  <title>StyleX - Women's Fashion Rentals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&family=Great+Vibes&family=Cormorant+Garamond:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #E91E63; /* Vibrant blush pink */
+      --secondary: #FFE4E1; /* Soft rose */
+      --accent: #F7C7A3; /* Rose gold */
+      --dark: #1A1423; /* Deep midnight */
+      --light: #FFF8F9; /* Ivory blush */
+      --gray: #A68A9B; /* Lavender-gray */
+      --gray-light: #FDF2F5; /* Pale pink */
+      --success: #FF99CC; /* Candy pink */
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+      overflow-x: hidden;
+      position: relative;
+    }
+    .bg-primary {
+      background-color: var(--primary) !important;
+    }
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      border: none;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      border-radius: 50px;
+      padding: 12px 40px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(233, 30, 99, 0.3);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(247, 199, 163, 0.4);
+    }
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+      border-radius: 50px;
+      padding: 10px 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .btn-outline-primary:hover, .btn-outline-primary:focus {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: #fff;
+      transform: scale(1.05);
+    }
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(233, 30, 99, 0.4), rgba(247, 199, 163, 0.3));
+      z-index: 0;
+    }
+    .hero-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-section h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 6rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      margin-bottom: 30px;
+      animation: fadeInDown 1.2s ease;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .hero-section p {
+      font-size: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 50px;
+      animation: fadeInUp 1.2s ease 0.4s;
+      animation-fill-mode: both;
+    }
+    .collections {
+      padding: 140px 0;
+      background: linear-gradient(180deg, var(--gray-light), #fff);
+      position: relative;
+    }
+    .collections::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/floral-pattern.png') repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+    .collection-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      height: 400px;
+      background: #fff;
+    }
+    .collection-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(233, 30, 99, 0.2);
+    }
+    .collection-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+    .collection-card:hover img {
+      transform: scale(1.15);
+      filter: brightness(1.2);
+    }
+    .collection-card .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(233, 30, 99, 0.5), rgba(247, 199, 163, 0.7));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .collection-card:hover .overlay {
+      opacity: 1;
+    }
+    .collection-card h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    }
+    .collection-card p {
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .collection-card:hover p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .collection-card a {
+      text-decoration: none;
+    }
+    .collections h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 70px;
+      text-align: center;
+      position: relative;
+    }
+    .collections h2::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 5px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      margin: 20px auto;
+      border-radius: 3px;
+    }
+    .filter-sidebar {
+      background-color: #fff;
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(233, 30, 99, 0.1);
+      position: sticky;
+      top: 20px;
+      transition: all 0.3s ease;
+    }
+    .filter-sidebar h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 35px;
+      color: var(--primary);
+      text-align: center;
+    }
+    .filter-sidebar .form-check {
+      margin-bottom: 18px;
+      transition: all 0.3s ease;
+    }
+    .filter-sidebar .form-check:hover {
+      background-color: var(--gray-light);
+      padding-left: 15px;
+      border-radius: 10px;
+    }
+    .product-card {
+      border: none;
+      background-color: #fff;
+      border-radius: 25px;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      position: relative;
+    }
+    .product-card:hover {
+      box-shadow: 0 15px 35px rgba(233, 30, 99, 0.2);
+      transform: translateY(-10px);
+    }
+    .product-card img {
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.1);
+    }
+    .product-card .card-body {
+      padding: 30px;
+    }
+    .product-card h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+    .product-card .category-tag {
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin-bottom: 15px;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .product-card .trending-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(45deg, var(--accent), var(--primary));
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .lookbook-section {
+      padding: 120px 0;
+      background-color: var(--gray-light);
+      position: relative;
+    }
+    .lookbook-section h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 70px;
+      text-align: center;
+    }
+    .lookbook-section h2::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 5px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      margin: 20px auto;
+    }
+    .lookbook-card {
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      height: 450px;
+      transition: transform 0.5s ease;
+    }
+    .lookbook-card:hover {
+      transform: translateY(-12px);
+    }
+    .lookbook-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .lookbook-card .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 25px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: #fff;
+      text-align: center;
+    }
+    .lookbook-card h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    .why-rent-section {
+      background: linear-gradient(180deg, #fff, var(--gray-light));
+      padding: 140px 0;
+      position: relative;
+    }
+    .why-rent-section .icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 30px;
+      transition: transform 0.4s ease;
+    }
+    .why-rent-section .col-md-3:hover .icon {
+      transform: rotate(15deg) scale(1.3);
+    }
+    .why-rent-section h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--dark);
+    }
+    .testimonial-section {
+      padding: 140px 0;
+      background-color: #fff;
+      position: relative;
+    }
+    .testimonial-card {
+      border: none;
+      background-color: var(--gray-light);
+      border-radius: 25px;
+      padding: 35px;
+      text-align: center;
+      transition: transform 0.4s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(233, 30, 99, 0.2);
+    }
+    .testimonial-card p {
+      font-style: italic;
+      color: var(--gray);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+    }
+    .testimonial-card h6 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+    .navbar-brand {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      font-size: 3rem;
+      letter-spacing: 4px;
+      color: var(--primary) !important;
+    }
+    .nav-link {
+      color: var(--dark);
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .footer {
+      background-color: var(--dark);
+      color: #fff;
+      padding: 100px 0 40px;
+      position: relative;
+    }
+    .footer a {
+      color: #fff !important;
+      transition: color 0.3s ease;
+    }
+    .footer a:hover {
+      color: var(--accent) !important;
+    }
+    .breadcrumb {
+      background-color: transparent;
+      font-size: 1rem;
+      margin-bottom: 35px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: #fff;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(247, 199, 163, 0.4);
+    }
+    .style-match-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(233, 30, 99, 0.3);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+    .style-match-popup.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .style-match-popup h3 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .style-match-popup p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+    .style-match-popup .btn-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--gray);
+    }
+    .style-match-popup .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .style-match-popup label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .style-match-popup select, .style-match-popup input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--gray);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+    }
+    .style-match-popup .result {
+      display: none;
+      margin-top: 20px;
+    }
+    .style-match-popup .result h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    .style-match-popup .result p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gray);
+    }
+    .overlay-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+    .overlay-bg.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .fade-in {
+      animation: fadeIn 1.8s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 991px) {
+      .filter-sidebar {
+        position: static;
+        margin-bottom: 50px;
+      }
+      .hero-section {
+        height: 80vh;
+      }
+      .hero-section h1 {
+        font-size: 4rem;
+      }
+      .collection-card {
+        height: 350px;
+      }
+      .lookbook-card {
+        height: 400px;
+      }
+    }
+    @media (max-width: 767px) {
+      .col-md-6.col-lg-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+      .hero-section h1 {
+        font-size: 3.5rem;
+      }
+      .hero-section p {
+        font-size: 1.3rem;
+      }
+      .product-card img {
+        height: 260px;
+      }
+      .collection-card {
+        height: 300px;
+      }
+      .collections h2, .lookbook-section h2 {
+        font-size: 3.5rem;
+      }
+      .lookbook-card {
+        height: 350px;
+      }
+      .style-match-popup {
+        padding: 30px;
+        max-width: 90%;
+      }
+    }
+    @media (max-width: 576px) {
+      .col-md-6.col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .collection-card {
+        height: 250px;
+      }
+      .collection-card h5 {
+        font-size: 1.8rem;
+      }
+      .collection-card p {
+        font-size: 1rem;
+      }
+      .hero-section h1 {
+        font-size: 3rem;
+      }
+      .product-card img {
+        height: 220px;
+      }
+      .lookbook-card {
+        height: 300px;
+      }
+      .lookbook-card h5 {
+        font-size: 1.6rem;
+      }
+      .style-match-popup h3 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky-top bg-white shadow-sm">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-star me-2"></i>StyleX
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="female.html">Women's Fashion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="how-it-works.html">How it Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-outline-primary" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+              <a class="btn btn-primary" href="signup.html">Join the Magic</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-section fade-in">
+    <video autoplay muted loop playsinline>
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-in-a-wedding-dress-holding-flowers-1285-large.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+      <h1>Dream in Style</h1>
+      <p>Rent enchanting designer wear to make every moment sparkle.</p>
+      <div class="d-flex justify-content-center gap-4">
+        <a href="#products" class="btn btn-primary">Shop the Dream</a>
+        <a href="#style-match" class="btn btn-outline-primary style-match-trigger">Find Your Match</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="collections">
+    <div class="container">
+      <h2 class="fw-bold">Your Style Awaits</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <a href="#products" class="collection-card">
+            <img src="https://images.unsplash.com/photo-1521335625578-1b9e68a0f28f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Ethnic & Bridal Wear">
+            <div class="overlay">
+              <h5>Ethnic & Bridal Wear</h5>
+              <p>Timeless elegance for your special day</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#products" class="collection-card">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Western Party Wear">
+            <div class="overlay">
+              <h5>Western Party Wear</h5>
+              <p>Chic looks for dazzling nights</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#products" class="collection-card">
+            <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97bd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Accessories">
+            <div class="overlay">
+              <h5>Accessories</h5>
+              <p>Sparkle with every detail</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lookbook-section">
+    <div class="container">
+      <h2>Lookbook Inspirations</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="lookbook-card">
+            <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Royal Bridal Look">
+            <div class="overlay">
+              <h5>Royal Bridal Look</h5>
+              <a href="#products" class="btn btn-outline-primary btn-sm">Shop the Look</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="lookbook-card">
+            <img src="https://images.unsplash.com/photo-1568254183919-78a4f752a599?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Glam Party Look">
+            <div class="overlay">
+              <h5>Glam Party Look</h5>
+              <a href="#products" class="btn btn-outline-primary btn-sm">Shop the Look</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="lookbook-card">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Modern Ethnic Look">
+            <div class="overlay">
+              <h5>Modern Ethnic Look</h5>
+              <a href="#products" class="btn btn-outline-primary btn-sm">Shop the Look</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Women's Fashion</li>
+        </ol>
+      </nav>
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <div class="filter-sidebar">
+            <h5 class="fw-bold">Find Your Glam</h5>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Category</label>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="ethnic" value="Ethnic & Bridal Wear">
+                <label class="form-check-label" for="ethnic">Ethnic & Bridal Wear</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="party" value="Western Party Wear">
+                <label class="form-check-label" for="party">Western Party Wear</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="footwear" value="Footwear">
+                <label class="form-check-label" for="footwear">Footwear</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input category-filter" type="checkbox" id="accessories" value="Accessories">
+                <label class="form-check-label" for="accessories">Accessories</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Price Range</label>
+              <input type="range" class="form-range" min="500" max="20000" step="500" id="priceRange">
+              <small class="text-muted" id="priceDisplay">₹500 - ₹20,000</small>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Brand</label>
+              <select class="form-select brand-filter">
+                <option value="All">All</option>
+                <option value="Sabyasachi">Sabyasachi</option>
+                <option value="Manish Malhotra">Manish Malhotra</option>
+                <option value="Zara">Zara</option>
+                <option value="Gucci">Gucci</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold">Rental Duration</label>
+              <div class="form-check">
+                <input class="form-check-input duration-filter" type="checkbox" id="short-term" value="short-term">
+                <label class="form-check-label" for="short-term">Short-Term (1-7 days)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input duration-filter" type="checkbox" id="long-term" value="long-term">
+                <label class="form-check-label" for="long-term">Long-Term (7+ days)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-8">
+          <h2 class="fw-bold mb-4">Enchanted Fashion Rentals</h2>
+          <div class="row g-4" id="products">
+            <div class="col-md-6 col-lg-4 product-item" data-category="Ethnic & Bridal Wear" data-price="5000" data-brand="Sabyasachi" data-duration="short-term">
+              <div class="card product-card">
+                <span class="trending-badge">Runway Star</span>
+                <img src="https://images.unsplash.com/photo-1521335625578-1b9e68a0f28f?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80" class="card-img-top" alt="Bridal Lehenga">
+                <div class="card-body">
+                  <p class="category-tag">Ethnic & Bridal Wear</p>
+                  <h5 class="card-title">Bridal Lehenga</h5>
+                  <p class="card-text text-muted small">A fairytale lehenga for your big day.</p>
+                  <p class="fw-bold">₹5000 / 7 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.9</span>
+                    <a href="booking.html?item=bridal-lehenga" class="btn btn-outline-primary btn-sm" data-item="bridal-lehenga">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 product-item" data-category="Western Party Wear" data-price="3500" data-brand="Zara" data-duration="short-term">
+              <div class="card product-card">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80" class="card-img-top" alt="Evening Dress">
+                <div class="card-body">
+                  <p class="category-tag">Western Party Wear</p>
+                  <h5 class="card-title">Evening Dress</h5>
+                  <p class="card-text text-muted small">A showstopper for glamorous nights.</p>
+                  <p class="fw-bold">₹3500 / 7 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.8</span>
+                    <a href="booking.html?item=evening-dress" class="btn btn-outline-primary btn-sm" data-item="evening-dress">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 product-item" data-category="Footwear" data-price="2000" data-brand="Gucci" data-duration="short-term">
+              <div class="card product-card">
+                <span class="trending-badge">Chic Pick</span>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80" class="card-img-top" alt="Branded Heels">
+                <div class="card-body">
+                  <p class="category-tag">Footwear</p>
+                  <h5 class="card-title">Branded Heels</h5>
+                  <p class="card-text text-muted small">Strut in style with these heels.</p>
+                  <p class="fw-bold">₹2000 / 7 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.7</span>
+                    <a href="booking.html?item=branded-heels" class="btn btn-outline-primary btn-sm" data-item="branded-heels">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 product-item" data-category="Accessories" data-price="1500" data-brand="Manish Malhotra" data-duration="short-term">
+              <div class="card product-card">
+                <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97bd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80" class="card-img-top" alt="Bridal Jewelry Set">
+                <div class="card-body">
+                  <p class="category-tag">Accessories</p>
+                  <h5 class="card-title">Bridal Jewelry Set</h5>
+                  <p class="card-text text-muted small">Dazzle with gold-plated elegance.</p>
+                  <p class="fw-bold">₹1500 / 7 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.8</span>
+                    <a href="booking.html?item=bridal-jewelry" class="btn btn-outline-primary btn-sm" data-item="bridal-jewelry">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 product-item" data-category="Ethnic & Bridal Wear" data-price="4000" data-brand="Manish Malhotra" data-duration="short-term">
+              <div class="card product-card">
+                <span class="trending-badge">Timeless</span>
+                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80" class="card-img-top" alt="Designer Saree">
+                <div class="card-body">
+                  <p class="category-tag">Ethnic & Bridal Wear</p>
+                  <h5 class="card-title">Designer Saree</h5>
+                  <p class="card-text text-muted small">A saree that radiates grace.</p>
+                  <p class="fw-bold">₹4000 / 7 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.9</span>
+                    <a href="booking.html?item=designer-saree" class="btn btn-outline-primary btn-sm" data-item="designer-saree">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 product-item" data-category="Western Party Wear" data-price="3000" data-brand="Gucci" data-duration="short-term">
+              <div class="card product-card">
+                <img src="https://images.unsplash.com/photo-1568254183919-78a4f752a599?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80" class="card-img-top" alt="Luxury Jumpsuit">
+                <div class="card-body">
+                  <p class="category-tag">Western Party Wear</p>
+                  <h5 class="card-title">Luxury Jumpsuit</h5>
+                  <p class="card-text text-muted small">Bold and chic for modern queens.</p>
+                  <p class="fw-bold">₹3000 / 7 days</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-star text-warning"></i> 4.7</span>
+                    <a href="booking.html?item=luxury-jumpsuit" class="btn btn-outline-primary btn-sm" data-item="luxury-jumpsuit">Quick View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-5">
+            <button class="btn btn-primary" id="loadMore">Discover More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-rent-section">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">Why StyleX is Your Dream Closet</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-3">
+          <i class="fas fa-crown icon"></i>
+          <h5>Designer Magic</h5>
+          <p class="text-muted">Wear Sabyasachi, Gucci, and more.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="fas fa-wallet icon"></i>
+          <h5>Affordable Glam</h5>
+          <p class="text-muted">Luxury at up to 70% off retail.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="fas fa-leaf icon"></i>
+          <h5>Eco-Luxe</h5>
+          <p class="text-muted">Sustainable fashion for a better planet.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="fas fa-shipping-fast icon"></i>
+          <h5>Swift Delivery</h5>
+          <p class="text-muted">Fast delivery across India.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonial-section">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">Our Style Stars Shine</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card testimonial-card">
+            <p>"The lehenga was straight out of a fairytale! My wedding was perfect."</p>
+            <h6>Ananya P.</h6>
+            <div><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card testimonial-card">
+            <p>"The party dress made me feel like a celebrity. Obsessed with StyleX!"</p>
+            <h6>Priya S.</h6>
+            <div><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star-half-alt text-warning"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card testimonial-card">
+            <p>"The jewelry set was pure magic. Made my bridal look unforgettable."</p>
+            <h6>Neha M.</h6>
+            <div><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h4 class="fw-bold mb-3"><i class="fas fa-star me-2"></i>StyleX</h4>
+          <p>Your magical wardrobe for every occasion.</p>
+          <div class="d-flex gap-3">
+            <a href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
+            <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in fa-lg"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html" class="text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">About Us</a></li>
+            <li class="mb-2"><a href="female.html" class="text-decoration-none">Women's Fashion</a></li>
+            <li class="mb-2"><a href="how-it-works.html" class="text-decoration-none">How It Works</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="fw-bold mb-3">Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-decoration-none">Ethnic & Bridal Wear</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Western Party Wear</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Footwear</a></li>
+            <li class="mb-2"><a href="#" class="text-decoration-none">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h5 class="fw-bold mb-3">Newsletter</h5>
+          <p>Stay enchanted with exclusive fashion updates.</p>
+          <div class="mb-3 newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email address" required>
+              <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <small class="text-success d-none" id="newsletterSuccess">Subscribed successfully!</small>
+            <small class="text-danger d-none" id="newsletterError">Please enter a valid email.</small>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4 border-light">
+      <div class="text-center">
+        <p class="mb-0">© 2025 StyleX. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="style-match-popup" id="styleMatchPopup">
+    <button class="btn-close" id="closePopup"></button>
+    <div class="quiz-form" id="quizForm">
+      <h3>Your Style Match</h3>
+      <p>Answer a few questions to discover your perfect look!</p>
+      <div class="form-group">
+        <label for="stylePreference">What's your style vibe?</label>
+        <select id="stylePreference" class="form-control">
+          <option value="elegant">Elegant & Classic</option>
+          <option value="boho">Boho & Romantic</option>
+          <option value="modern">Modern & Bold</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="occasion">What's the occasion?</label>
+        <select id="occasion" class="form-control">
+          <option value="wedding">Wedding</option>
+          <option value="party">Party</option>
+          <option value="festive">Festive Event</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="colorPreference">Favorite color palette?</label>
+        <select id="colorPreference" class="form-control">
+          <option value="pastels">Pastels (Pink, Mint, Lavender)</option>
+          <option value="jewels">Jewel Tones (Emerald, Ruby, Sapphire)</option>
+          <option value="neutrals">Neutrals (Gold, Ivory, Black)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+      </div>
+      <button class="btn btn-primary" id="submitQuiz">See Your Style</button>
+    </div>
+    <div class="result" id="quizResult">
+      <h4>Your Perfect Look, <span id="resultName"></span>!</h4>
+      <p id="resultDescription"></p>
+      <a href="#products" class="btn btn-primary" id="shopLook">Shop This Look</a>
+    </div>
+  </div>
+  <div class="overlay-bg" id="overlayBg"></div>
+
+  <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Newsletter Form
+      const newsletterForm = document.querySelector('.newsletter-form');
+      const newsletterSuccess = document.getElementById('newsletterSuccess');
+      const newsletterError = document.getElementById('newsletterError');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const email = newsletterForm.querySelector('input').value;
+          if (!email.includes('@') || email.length < 5) {
+            newsletterError.classList.remove('d-none');
+            newsletterSuccess.classList.add('d-none');
+            return;
+          }
+          newsletterSuccess.classList.remove('d-none');
+          newsletterError.classList.add('d-none');
+          newsletterForm.reset();
+          setTimeout(() => newsletterSuccess.classList.add('d-none'), 3000);
+        });
+      }
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      });
+
+      // Style Match Popup and Quiz
+      const styleMatchTriggers = document.querySelectorAll('.style-match-trigger');
+      const styleMatchPopup = document.getElementById('styleMatchPopup');
+      const overlayBg = document.getElementById('overlayBg');
+      const closePopup = document.getElementById('closePopup');
+      const quizForm = document.getElementById('quizForm');
+      const quizResult = document.getElementById('quizResult');
+      const submitQuiz = document.getElementById('submitQuiz');
+      const resultName = document.getElementById('resultName');
+      const resultDescription = document.getElementById('resultDescription');
+
+      function showPopup() {
+        styleMatchPopup.classList.add('show');
+        overlayBg.classList.add('show');
+        quizForm.style.display = 'block';
+        quizResult.style.display = 'none';
+      }
+
+      function hidePopup() {
+        styleMatchPopup.classList.remove('show');
+        overlayBg.classList.remove('show');
+      }
+
+      styleMatchTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          showPopup();
+        });
+      });
+
+      closePopup.addEventListener('click', hidePopup);
+      overlayBg.addEventListener('click', hidePopup);
+
+      // Auto-show popup after 5 seconds
+      setTimeout(showPopup, 5000);
+
+      // Quiz Logic
+      submitQuiz.addEventListener('click', () => {
+        const stylePreference = document.getElementById('stylePreference').value;
+        const occasion = document.getElementById('occasion').value;
+        const colorPreference = document.getElementById('colorPreference').value;
+        const name = document.getElementById('name').value;
+
+        if (!name) {
+          alert('Please enter your name!');
+          return;
+        }
+
+        let recommendation = '';
+        let itemLink = '#products';
+
+        if (stylePreference === 'elegant' && occasion === 'wedding') {
+          recommendation = `For a ${occasion}, we recommend a ${colorPreference} Bridal Lehenga by Sabyasachi. Its timeless elegance will make you shine!`;
+          itemLink = 'booking.html?item=bridal-lehenga';
+        } else if (stylePreference === 'boho' && occasion === 'party') {
+          recommendation = `For a ${occasion}, try a ${colorPreference} Evening Dress by Zara. Its romantic flow will steal the show!`;
+          itemLink = 'booking.html?item=evening-dress';
+        } else if (stylePreference === 'modern' && occasion === 'festive') {
+          recommendation = `For a ${occasion}, a ${colorPreference} Designer Saree by Manish Malhotra is your bold choice!`;
+          itemLink = 'booking.html?item=designer-saree';
+        } else {
+          recommendation = `For a ${occasion}, a ${colorPreference} Luxury Jumpsuit by Gucci complements your ${stylePreference} vibe perfectly!`;
+          itemLink = 'booking.html?item=luxury-jumpsuit';
+        }
+
+        resultName.textContent = name;
+        resultDescription.textContent = recommendation;
+        document.getElementById('shopLook').href = itemLink;
+
+        quizForm.style.display = 'none';
+        quizResult.style.display = 'block';
+      });
+
+      // Filter System
+      const categoryFilters = document.querySelectorAll('.category-filter');
+      const brandFilter = document.querySelector('.brand-filter');
+      const durationFilters = document.querySelectorAll('.duration-filter');
+      const priceRange = document.getElementById('priceRange');
+      const priceDisplay = document.getElementById('priceDisplay');
+      const products = document.querySelectorAll('.product-item');
+
+      function applyFilters() {
+        const selectedCategories = Array.from(categoryFilters)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.value);
+        const selectedBrand = brandFilter.value;
+        const selectedDurations = Array.from(durationFilters)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.value);
+        const maxPrice = parseInt(priceRange.value);
+
+        products.forEach(product => {
+          const category = product.dataset.category;
+          const price = parseInt(product.dataset.price);
+          const brand = product.dataset.brand;
+          const duration = product.dataset.duration;
+
+          const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(category);
+          const brandMatch = selectedBrand === 'All' || selectedBrand === brand;
+          const durationMatch = selectedDurations.length === 0 || selectedDurations.includes(duration);
+          const priceMatch = price <= maxPrice;
+
+          if (categoryMatch && brandMatch && durationMatch && priceMatch) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      }
+
+      categoryFilters.forEach(filter => filter.addEventListener('change', applyFilters));
+      brandFilter.addEventListener('change', applyFilters);
+      durationFilters.forEach(filter => filter.addEventListener('change', applyFilters));
+      priceRange.addEventListener('input', () => {
+        priceDisplay.textContent = `₹500 - ₹${priceRange.value}`;
+        applyFilters();
+      });
+
+      // Load More Functionality
+      const loadMoreBtn = document.getElementById('loadMore');
+      const productsContainer = document.getElementById('products');
+
+      const additionalProducts = [
+        {
+          category: 'Ethnic & Bridal Wear',
+          price: 4500,
+          brand: 'Sabyasachi',
+          duration: 'short-term',
+          title: 'Anarkali Gown',
+          description: 'A regal gown for ethereal beauty.',
+          image: 'https://images.unsplash.com/photo-1521335625578-1b9e68a0f28f?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80',
+          rating: 4.9,
+          badge: 'New Arrival',
+          item: 'anarkali-gown'
+        },
+        {
+          category: 'Western Party Wear',
+          price: 3200,
+          brand: 'Zara',
+          duration: 'short-term',
+          title: 'Cocktail Dress',
+          description: 'A flirty dress for starry nights.',
+          image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80',
+          rating: 4.8,
+          badge: 'Trending',
+          item: 'cocktail-dress'
+        },
+        {
+          category: 'Footwear',
+          price: 1800,
+          brand: 'Manish Malhotra',
+          duration: 'short-term',
+          title: 'Ethnic Footwear',
+          description: 'Embellished juttis for bridal charm.',
+          image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80',
+          rating: 4.7,
+          badge: 'Popular',
+          item: 'ethnic-footwear'
+        },
+        {
+          category: 'Accessories',
+          price: 1200,
+          brand: 'Gucci',
+          duration: 'short-term',
+          title: 'Designer Clutch',
+          description: 'A sparkling clutch for glamour.',
+          image: 'https://images.unsplash.com/photo-1606760227091-3dd870d97bd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=283&q=80',
+          rating: 4.8,
+          badge: 'Best Value',
+          item: 'designer-clutch'
+        }
+      ];
+
+      let currentIndex = 0;
+      const itemsPerLoad = 3;
+
+      loadMoreBtn.addEventListener('click', () => {
+        const nextProducts = additionalProducts.slice(currentIndex, currentIndex + itemsPerLoad);
+
+        nextProducts.forEach(product => {
+          const productCard = document.createElement('div');
+          productCard.className = 'col-md-6 col-lg-4 product-item';
+          productCard.dataset.category = product.category;
+          productCard.dataset.price = product.price;
+          productCard.dataset.brand = product.brand;
+          productCard.dataset.duration = product.duration;
+
+          productCard.innerHTML = `
+            <div class="card product-card">
+              ${product.badge ? `<span class="trending-badge">${product.badge}</span>` : ''}
+              <img src="${product.image}" class="card-img-top" alt="${product.title}">
+              <div class="card-body">
+                <p class="category-tag">${product.category}</p>
+                <h5 class="card-title">${product.title}</h5>
+                <p class="card-text text-muted small">${product.description}</p>
+                <p class="fw-bold">₹${product.price} / 7 days</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="text-muted small"><i class="fas fa-star text-warning"></i> ${product.rating}</span>
+                  <a href="booking.html?item=${product.item}" class="btn btn-outline-primary btn-sm" data-item="${product.item}">Quick View</a>
+                </div>
+              </div>
+            </div>
+          `;
+
+          productsContainer.appendChild(productCard);
+        });
+
+        currentIndex += itemsPerLoad;
+
+        if (currentIndex >= additionalProducts.length) {
+          loadMoreBtn.style.display = 'none';
+        }
+
+        const allProducts = document.querySelectorAll('.product-item');
+        allProducts.forEach(product => {
+          product.style.display = 'block';
+        });
+        applyFilters();
+      });
+    });
+  </script>
+</body>
+</html>
